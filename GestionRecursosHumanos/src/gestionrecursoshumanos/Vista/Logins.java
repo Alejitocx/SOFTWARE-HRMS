@@ -21,21 +21,23 @@ public class Logins extends javax.swing.JPanel {
         initComponents();
     }
     
-private final String adminEmail = "admin@skillstream.com";
+private final String adminEmail = "admin";
 private final String adminPass = "admin123";
 
-private final String userEmail = "user@skillstream.com";
+private final String userEmail = "user";
 private final String userPass = "user123";
 
- public void validar() {
-        if (!"".equals(userEmail) && !"".equals(userPass)) {
-            if (jTextcoreeo.equals(userEmail) && jPasswordField1.equals(userPass)) {
+public void validar() {
+        String correo = jTextcoreeo1.getText();
+        String pass = String.valueOf(jPasswordField1.getPassword());
+        if (!"".equals(correo) && !"".equals(pass)) {
+            if (correo.equals(userEmail) && pass.equals(userPass)) {
                 // Usuario normal
                 SwingUtilities.invokeLater(() -> {
                     // Crear el JFrame
                     JFrame frame = new JFrame("GESTION DE RECURSOS HUMANOS - Usuario");
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setSize(1000, 634);
+                    frame.setSize(1400, 804);
 
                     // Crear el panel Usuario y añadirlo al frame
                     Usuario panel = new Usuario();
@@ -44,16 +46,16 @@ private final String userPass = "user123";
                     // Hacer visible el frame
                     frame.setVisible(true);
                 });
-            } else if (jTextcoreeo.equals(adminEmail) && jPasswordField1.equals(adminPass)) {
+            } else if (correo.equals(adminEmail) && pass.equals(adminPass)) {
                 // Administrador
                 SwingUtilities.invokeLater(() -> {
                     // Crear el JFrame
                     JFrame frame = new JFrame("GESTION DE RECURSOS HUMANOS - Administrador");
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setSize(1000, 634);
+                    frame.setSize(1400, 804);
 
                     // Crear el panel Administrador y añadirlo al frame
-                    Administrador panel = new Administrador();
+                    Administradors panel = new Administradors();
                     frame.add(panel);
 
                     // Hacer visible el frame
@@ -248,7 +250,7 @@ private final String userPass = "user123";
                 .addGap(78, 78, 78))
         );
 
-        Left1.setBackground(new java.awt.Color(255, 0, 0));
+        Left1.setBackground(new java.awt.Color(255, 22, 22));
         Left1.setMinimumSize(new java.awt.Dimension(400, 500));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
