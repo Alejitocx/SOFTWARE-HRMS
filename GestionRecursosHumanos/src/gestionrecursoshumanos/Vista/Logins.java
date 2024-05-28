@@ -53,7 +53,7 @@ public void validar() {
                     JFrame frame = new JFrame("GESTION DE RECURSOS HUMANOS - Administrador");
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setSize(1400, 804);
-
+ 
                     // Crear el panel Administrador y añadirlo al frame
                     Administradors panel = new Administradors();
                     frame.add(panel);
@@ -262,8 +262,9 @@ public void validar() {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Email");
 
+        jTextcoreeo1.setBackground(new java.awt.Color(255, 255, 255));
         jTextcoreeo1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextcoreeo1.setForeground(new java.awt.Color(102, 102, 102));
+        jTextcoreeo1.setForeground(new java.awt.Color(0, 0, 0));
         jTextcoreeo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextcoreeo1ActionPerformed(evt);
@@ -285,6 +286,8 @@ public void validar() {
             }
         });
 
+        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
+        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);

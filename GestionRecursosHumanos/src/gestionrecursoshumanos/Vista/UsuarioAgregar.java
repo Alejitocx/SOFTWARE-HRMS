@@ -55,7 +55,7 @@ public class UsuarioAgregar extends javax.swing.JPanel {
 
         jLabel23.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel23.setText("INGRESE LA HORA DE ENTRADA :");
+        jLabel23.setText("INGRESE LA HORA DE SALIDA :");
         jLabel23.setToolTipText("");
 
         jTextField13.setBackground(new java.awt.Color(255, 255, 255));
@@ -73,6 +73,7 @@ public class UsuarioAgregar extends javax.swing.JPanel {
 
         jTextField14.setBackground(new java.awt.Color(255, 255, 255));
         jTextField14.setForeground(new java.awt.Color(0, 0, 0));
+        jTextField14.setText("H");
         jTextField14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -86,6 +87,12 @@ public class UsuarioAgregar extends javax.swing.JPanel {
 
         jTextField15.setBackground(new java.awt.Color(255, 255, 255));
         jTextField15.setForeground(new java.awt.Color(0, 0, 0));
+        jTextField15.setText("H");
+        jTextField15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField15ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 102, 0));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,7 +113,6 @@ public class UsuarioAgregar extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,6 +181,10 @@ public class UsuarioAgregar extends javax.swing.JPanel {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField15ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
