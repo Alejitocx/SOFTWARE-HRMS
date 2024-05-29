@@ -4,27 +4,34 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/Usuario.java</file>
-            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/AdminSelec.java</file>
-            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/AdminSalida.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/Descuentos.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/Cargo.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/UsuarioSalida.java</file>
-            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/HorasTrabajadas.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/Nomina.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/Personas.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/UsuarioCal.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/AdminHoras.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/AdminCali.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/GestionRecursosHumanos.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/Administradors.java</file>
-            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Conexion/Conexion.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/DescuentoLey.java</file>
-            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/Categoria.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/UsuarioAgregar.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/Logins.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/AdminNomi.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/AdminFinali.java</file>
-            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/salida.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/AdminCrear.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/TerminacionContrato.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/AdminSelec.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/AdminSalida.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/HorasTrabajadas.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/ProcesoPersona.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/Evaluacion.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Conexion/Conexion.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/Contrato.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/Salida.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/Categoria.java</file>
             <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Vista/Administrador.java</file>
+            <file>file:/C:/Users/alejo/OneDrive/Documents/Quinto%20Semestre/GESTION%20PROYECTO%20SOFWARE/GestionRecursosHumanos/src/gestionrecursoshumanos/Modelo/ProcesoSeleccion.java</file>
         </group>
     </open-files>
 </project-private>

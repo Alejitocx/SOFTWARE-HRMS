@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class Conexion {
     private final String HOSI = "localhost";
     private final String PUERTQ = "5432";
-    private final String DB = "RECURSOSHUMANOS";
+    private final String DB = "RECURSOSHUMANOS1";
     private final String USER = "postgres";
     private final String CONTRA = "123456";
     
