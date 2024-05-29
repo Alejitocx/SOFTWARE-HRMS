@@ -15,14 +15,14 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
     public static Connection ConnectionAS;
-    private final String HOSI = "localhost";
-    private final String PUERTQ = "5432";
-    private final String DB = "RECURSOSHUMANOS1";
-    private final String USER = "postgres";
-    private final String CONTRA = "123456";
+    private  static final String HOSI = "localhost";
+    private static final String PUERTQ = "5432";
+    private static final String DB = "RECURSOSHUMANOS1";
+    private static final String USER = "postgres";
+    private static final String CONTRA = "123456";
     
     
-     public Connection ConnectionAS() {
+       public static Connection ConnectionAS() {
         Connection conexion = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -36,5 +36,4 @@ public class Conexion {
         }
         return conexion;
     }
-    
 }

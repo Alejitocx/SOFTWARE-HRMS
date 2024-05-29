@@ -4,8 +4,10 @@
  */
 package gestionrecursoshumanos.Modelo;
 
+import javax.persistence.Entity;
 
 
+@Entity
 public class Cargo {
     
     private int idCargo;

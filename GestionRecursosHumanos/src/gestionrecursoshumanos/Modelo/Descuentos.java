@@ -10,17 +10,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 
 @Entity
-public class Descuentos {
+    public class Descuentos {
     @Id
-    private int idDescuentos;
-    private int descuentos;
-
+    private int idDescuento;
+    
     @ManyToOne
-    @JoinColumn(name = "ley")
     private DescuentoLey descuentoLey;
 
     @ManyToOne
-    @JoinColumn(name = "nomina")
     private Nomina nomina;
 
     // Constructor sin parámetros
@@ -28,28 +25,19 @@ public class Descuentos {
     }
 
     // Constructor con parámetros
-    public Descuentos(int idDescuentos, int descuentos, DescuentoLey descuentoLey, Nomina nomina) {
-        this.idDescuentos = idDescuentos;
-        this.descuentos = descuentos;
+    public Descuentos(int idDescuento, DescuentoLey descuentoLey, Nomina nomina) {
+        this.idDescuento = idDescuento;
         this.descuentoLey = descuentoLey;
         this.nomina = nomina;
     }
 
-    // Getters y Setters
-    public int getIdDescuentos() {
-        return idDescuentos;
+    // Getters and Setters
+    public int getIdDescuento() {
+        return idDescuento;
     }
 
-    public void setIdDescuentos(int idDescuentos) {
-        this.idDescuentos = idDescuentos;
-    }
-
-    public int getDescuentos() {
-        return descuentos;
-    }
-
-    public void setDescuentos(int descuentos) {
-        this.descuentos = descuentos;
+    public void setIdDescuento(int idDescuento) {
+        this.idDescuento = idDescuento;
     }
 
     public DescuentoLey getDescuentoLey() {

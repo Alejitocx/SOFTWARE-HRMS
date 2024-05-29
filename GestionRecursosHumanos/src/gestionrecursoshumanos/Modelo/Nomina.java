@@ -14,17 +14,14 @@ public class Nomina {
     @Id
     private int idNomina;
     private float pagoNomina;
-
+    
     @ManyToOne
-    @JoinColumn(name = "horasTrabajo")
     private HorasTrabajadas horasTrabajo;
-
+    
     @ManyToOne
-    @JoinColumn(name = "motivoSalida")
     private Salida motivoSalida;
-
+    
     @ManyToOne
-    @JoinColumn(name = "convenio")
     private Contrato convenio;
 
     // Constructor sin parámetros
@@ -40,7 +37,7 @@ public class Nomina {
         this.convenio = convenio;
     }
 
-    // Getters y Setters
+    // Getters and Setters
     public int getIdNomina() {
         return idNomina;
     }

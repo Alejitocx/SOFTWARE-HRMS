@@ -21,7 +21,7 @@ public class GestionRecursosHumanos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      /*   SwingUtilities.invokeLater(() -> {
+        SwingUtilities.invokeLater(() -> {
               //Crear el JFrame
             JFrame frame = new JFrame("GESTION DE RECURSOS HUMANOS");
              frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,7 +34,7 @@ public class GestionRecursosHumanos {
               //Hacer visible el frame
              frame.setVisible(true);
          });
-         */
+       
          Conexion conexion = new Conexion();
          conexion.ConnectionAS();
         
