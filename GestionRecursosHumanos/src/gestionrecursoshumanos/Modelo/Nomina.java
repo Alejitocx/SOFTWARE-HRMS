@@ -7,6 +7,7 @@ package gestionrecursoshumanos.Modelo;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 @Entity
 public class Nomina {
@@ -15,15 +16,15 @@ public class Nomina {
     private float pagoNomina;
 
     @ManyToOne
+    @JoinColumn(name = "horasTrabajo")
     private HorasTrabajadas horasTrabajo;
 
     @ManyToOne
-    private Descuentos descuento;
-
-    @ManyToOne
+    @JoinColumn(name = "motivoSalida")
     private Salida motivoSalida;
 
     @ManyToOne
+    @JoinColumn(name = "convenio")
     private Contrato convenio;
 
     // Constructor sin parámetros
@@ -31,16 +32,15 @@ public class Nomina {
     }
 
     // Constructor con parámetros
-    public Nomina(int idNomina, float pagoNomina, HorasTrabajadas horasTrabajo, Descuentos descuento, Salida motivoSalida, Contrato convenio) {
+    public Nomina(int idNomina, float pagoNomina, HorasTrabajadas horasTrabajo, Salida motivoSalida, Contrato convenio) {
         this.idNomina = idNomina;
         this.pagoNomina = pagoNomina;
         this.horasTrabajo = horasTrabajo;
-        this.descuento = descuento;
         this.motivoSalida = motivoSalida;
         this.convenio = convenio;
     }
 
-    // Getters and Setters
+    // Getters y Setters
     public int getIdNomina() {
         return idNomina;
     }
@@ -65,14 +65,6 @@ public class Nomina {
         this.horasTrabajo = horasTrabajo;
     }
 
-    public Descuentos getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(Descuentos descuento) {
-        this.descuento = descuento;
-    }
-
     public Salida getMotivoSalida() {
         return motivoSalida;
     }
@@ -89,4 +81,3 @@ public class Nomina {
         this.convenio = convenio;
     }
 }
-

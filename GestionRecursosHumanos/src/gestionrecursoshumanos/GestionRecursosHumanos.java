@@ -36,9 +36,7 @@ public class GestionRecursosHumanos {
          });
          */
          Conexion conexion = new Conexion();
-         conexion.getConection();
+         conexion.ConnectionAS();
         
     }
-    
-   
 }

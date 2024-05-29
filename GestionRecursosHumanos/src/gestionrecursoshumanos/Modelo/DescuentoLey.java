@@ -5,9 +5,12 @@
 package gestionrecursoshumanos.Modelo;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class DescuentoLey {
-    
+    @Id
     private int idDescuento;
     private String tipoDescuento;
 
@@ -21,7 +24,7 @@ public class DescuentoLey {
         this.tipoDescuento = tipoDescuento;
     }
 
-    // Getters and Setters
+    // Getters y Setters
     public int getIdDescuento() {
         return idDescuento;
     }
@@ -38,4 +41,3 @@ public class DescuentoLey {
         this.tipoDescuento = tipoDescuento;
     }
 }
-

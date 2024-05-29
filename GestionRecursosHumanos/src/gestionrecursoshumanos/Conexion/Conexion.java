@@ -6,6 +6,7 @@ package gestionrecursoshumanos.Conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
  * @author alejo
  */
 public class Conexion {
+    public static Connection ConnectionAS;
     private final String HOSI = "localhost";
     private final String PUERTQ = "5432";
     private final String DB = "RECURSOSHUMANOS1";
@@ -20,17 +22,19 @@ public class Conexion {
     private final String CONTRA = "123456";
     
     
-   public Connection getConection(){
+     public Connection ConnectionAS() {
         Connection conexion = null;
-        try{
+        try {
             Class.forName("org.postgresql.Driver");
-             String url = "jdbc:postgresql://" + HOSI + ":" + PUERTQ + "/" + DB;            conexion = DriverManager.getConnection(url,USER, CONTRA);
-            JOptionPane.showMessageDialog(null,"Conexion Estblecida");
-        }catch (Exception e){
-           JOptionPane.showMessageDialog(null, e.getMessage());
+            String url = "jdbc:postgresql://" + HOSI + ":" + PUERTQ + "/" + DB;
+            conexion = DriverManager.getConnection(url, USER, CONTRA);
+            System.out.println("Conexión establecida");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Error al cargar el controlador de PostgreSQL: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Error al conectar con la base de datos: " + e.getMessage());
         }
         return conexion;
-   }
-    
+    }
     
 }

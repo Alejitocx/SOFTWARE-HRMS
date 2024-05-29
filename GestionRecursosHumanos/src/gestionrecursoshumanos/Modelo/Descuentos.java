@@ -7,6 +7,7 @@ package gestionrecursoshumanos.Modelo;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 @Entity
 public class Descuentos {
@@ -15,21 +16,26 @@ public class Descuentos {
     private int descuentos;
 
     @ManyToOne
+    @JoinColumn(name = "ley")
     private DescuentoLey descuentoLey;
+
+    @ManyToOne
+    @JoinColumn(name = "nomina")
+    private Nomina nomina;
 
     // Constructor sin parámetros
     public Descuentos() {
     }
-    
 
     // Constructor con parámetros
-    public Descuentos(int idDescuentos, int descuentos, DescuentoLey descuentoLey) {
+    public Descuentos(int idDescuentos, int descuentos, DescuentoLey descuentoLey, Nomina nomina) {
         this.idDescuentos = idDescuentos;
         this.descuentos = descuentos;
         this.descuentoLey = descuentoLey;
+        this.nomina = nomina;
     }
 
-    // Getters and Setters
+    // Getters y Setters
     public int getIdDescuentos() {
         return idDescuentos;
     }
@@ -52,5 +58,13 @@ public class Descuentos {
 
     public void setDescuentoLey(DescuentoLey descuentoLey) {
         this.descuentoLey = descuentoLey;
+    }
+
+    public Nomina getNomina() {
+        return nomina;
+    }
+
+    public void setNomina(Nomina nomina) {
+        this.nomina = nomina;
     }
 }
