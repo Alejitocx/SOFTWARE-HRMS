@@ -4,12 +4,17 @@
  */
 package gestionrecursoshumanos.Vista;
 
+import gestionrecursoshumanos.Modelo.HorasTrabajadas;
+import gestionrecursoshumanos.Modelo.HorasTrabajadasDAO;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author alejo
  */
 public class AdminHoras extends javax.swing.JPanel {
-
+ 
     /**
      * Creates new form AdminHoras
      */
@@ -31,11 +36,11 @@ public class AdminHoras extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TxtIdHora = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        TxtHF = new javax.swing.JTextField();
+        TxtHI = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setMaximumSize(new java.awt.Dimension(1097, 817));
@@ -62,12 +67,12 @@ public class AdminHoras extends javax.swing.JPanel {
         jLabel2.setText("INGRESE HORA DE SALIDA:");
         jLabel2.setToolTipText("");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TxtIdHora.setBackground(new java.awt.Color(255, 255, 255));
+        TxtIdHora.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        TxtIdHora.setForeground(new java.awt.Color(0, 0, 0));
+        TxtIdHora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TxtIdHoraActionPerformed(evt);
             }
         });
 
@@ -81,18 +86,16 @@ public class AdminHoras extends javax.swing.JPanel {
         jLabel5.setText("INGRESE HORA DE ENTRADA:");
         jLabel5.setToolTipText("");
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField3.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField3.setText("H");
+        TxtHF.setBackground(new java.awt.Color(255, 255, 255));
+        TxtHF.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        TxtHF.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField2.setText("H");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        TxtHI.setBackground(new java.awt.Color(255, 255, 255));
+        TxtHI.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        TxtHI.setForeground(new java.awt.Color(0, 0, 0));
+        TxtHI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                TxtHIActionPerformed(evt);
             }
         });
 
@@ -118,15 +121,15 @@ public class AdminHoras extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TxtHF, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TxtIdHora, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(TxtHI, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -136,16 +139,16 @@ public class AdminHoras extends javax.swing.JPanel {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtIdHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtHI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtHF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(92, 92, 92)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
@@ -169,19 +172,82 @@ public class AdminHoras extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+try {
+    // Validar y parsear ID
+    int id;
+    try {
+        id = Integer.parseInt(TxtIdHora.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El ID debe ser un número entero.");
+        return;
+    }
+
+    // Validar y parsear hora de inicio
+    int horaInicio;
+    try {
+        String horaInicioStr = TxtHI.getText();
+        if (!horaInicioStr.matches("\\d{1,2}")) {
+            throw new IllegalArgumentException("La hora de inicio debe tener uno o dos dígitos NUMERICOS.");
+        }
+        horaInicio = Integer.parseInt(horaInicioStr);
+        if (horaInicio < 0 || horaInicio > 23) {
+            throw new NumberFormatException();
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "La hora de inicio debe ser un número válido entre 0 y 23.");
+        return;
+    } catch (IllegalArgumentException e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+        return;
+    }
+
+    // Validar y parsear hora de salida
+    int horaSalida;
+    try {
+        String horaSalidaStr = TxtHF.getText();
+        if (!horaSalidaStr.matches("\\d{1,2}")) {
+            throw new IllegalArgumentException("La hora de salida debe tener uno o dos dígitos NUMERICOS.");
+        }
+        horaSalida = Integer.parseInt(horaSalidaStr);
+        if (horaSalida < 0 || horaSalida > 23) {
+            throw new NumberFormatException();
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "La hora de salida debe ser un número válido entre 0 y 23.");
+        return;
+    } catch (IllegalArgumentException e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+        return;
+    }
+
+    // Crear instancia de HorasTrabajadas con horas como enteros
+    HorasTrabajadas horasTrabajadas = new HorasTrabajadas(id, horaInicio, horaSalida);
+
+    // Insertar las horas trabajadas en la base de datos
+    HorasTrabajadasDAO horasTrabajadasDAO = new HorasTrabajadasDAO();
+    horasTrabajadasDAO.insert(horasTrabajadas);
+
+    // Mostrar mensaje de éxito
+    JOptionPane.showMessageDialog(null, "Horas trabajadas insertadas exitosamente.");
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
+}
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TxtIdHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdHoraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TxtIdHoraActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void TxtHIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtHIActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_TxtHIActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TxtHF;
+    private javax.swing.JTextField TxtHI;
+    private javax.swing.JTextField TxtIdHora;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -189,8 +255,5 @@ public class AdminHoras extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

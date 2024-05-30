@@ -17,7 +17,7 @@ public class Conexion {
     public static Connection ConnectionAS;
     private  static final String HOSI = "localhost";
     private static final String PUERTQ = "5432";
-    private static final String DB = "RECURSOSHUMANOS1";
+    private static final String DB = "RECURSOSHUMANOS2";
     private static final String USER = "postgres";
     private static final String CONTRA = "123456";
     

@@ -4,16 +4,25 @@ create table DescuentoLey(
 	  porsentaje float
 );
 
+INSERT INTO DescuentoLey (id_descuento, tipo_descuento, porsentaje) 
+VALUES 
+    (1, 'Seguridad Social', 10.5),
+    (2, 'Pensión', 5.0),
+    (3, 'Salud', 3.0),
+    (4, 'Caja Compensación', 4.5);
+
+
 create table HorasTrabajadas(
      id_horasTrabajadas  int  primary key,
-     hora_inicio time,
-     hora_salida time
+     hora_inicio int,
+     hora_salida int
     
 );
 create table Salida(
       id_salida  int  primary key,
       tipo_salida VARCHAR(15)
 );
+select * from Salida;
 
 create table Cargo(
       id_cargo  int  PRIMARY KEY,
@@ -21,10 +30,19 @@ create table Cargo(
       salario FLOAT
 );
 
+
+INSERT INTO Cargo (id_cargo, cargos_disponibles, salario) VALUES 
+(1, 'Gerente de Tienda', 4500000.00), 
+(2, 'Supervisor de Caja', 2000000.00), 
+(3, 'Encargado de Inventario', 1800000.00), 
+(4, 'Cajer@', 1600000.00), 
+(5, 'Auxiliar de Bodega', 1550000.00);
+
 create table Categoria(
        id_categoria int PRIMARY KEY,
        tipo VARCHAR(25)
 );
+
 
 create table Personas(
       id_persona  int  primary key,
@@ -43,6 +61,14 @@ create table ProcesoSeleccion(
       FOREIGN KEY (funcion) REFERENCES Cargo (id_cargo)
 );
 
+INSERT INTO ProcesoSeleccion (id_proceso, funcion)
+VALUES 
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
+
 create table ProcesoPersona(
        id_procesoPersona INT PRIMARY KEY,
        candidato INT,
@@ -50,6 +76,8 @@ create table ProcesoPersona(
        FOREIGN KEY (candidato) REFERENCES Personas (id_persona),
        FOREIGN KEY (seleccion) REFERENCES ProcesoSeleccion (id_proceso)
 );
+
+
 
 create table Contrato(
       id_contrato  int  primary key,
@@ -74,6 +102,7 @@ create table Evaluacion(
       convenio INT,
       FOREIGN KEY (convenio) REFERENCES Contrato ( id_contrato)
 );
+
 
 create table Nomina(
        id_nomina  INT PRIMARY KEY,

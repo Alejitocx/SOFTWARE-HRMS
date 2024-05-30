@@ -4,6 +4,14 @@
  */
 package gestionrecursoshumanos.Vista;
 
+import gestionrecursoshumanos.Modelo.Salida;
+import gestionrecursoshumanos.Modelo.SalidaDAO;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author alejo
@@ -16,6 +24,14 @@ public class AdminSalida extends javax.swing.JPanel {
     public AdminSalida() {
         initComponents();
     }
+    
+    class NonEditableTableModel extends DefaultTableModel {
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        // Todas las celdas no son editables
+        return false;
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,18 +47,19 @@ public class AdminSalida extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        JTwo = new javax.swing.JComboBox<>();
+        TxtID = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField4 = new javax.swing.JTextField();
+        Comb2 = new javax.swing.JComboBox<>();
+        Txt1 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setMaximumSize(new java.awt.Dimension(1097, 817));
@@ -69,22 +86,22 @@ public class AdminSalida extends javax.swing.JPanel {
         jLabel6.setText("INGRESE TIPO DE SALIDA :");
         jLabel6.setToolTipText("");
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Footlight MT Light", 1, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACACIONES", "LICENCIA", "LICENCIA NO REMUNARADA" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        JTwo.setBackground(new java.awt.Color(255, 255, 255));
+        JTwo.setFont(new java.awt.Font("Footlight MT Light", 1, 14)); // NOI18N
+        JTwo.setForeground(new java.awt.Color(0, 0, 0));
+        JTwo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACACIONES", "LICENCIA" }));
+        JTwo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                JTwoActionPerformed(evt);
             }
         });
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Footlight MT Light", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TxtID.setBackground(new java.awt.Color(255, 255, 255));
+        TxtID.setFont(new java.awt.Font("Footlight MT Light", 1, 14)); // NOI18N
+        TxtID.setForeground(new java.awt.Color(0, 0, 0));
+        TxtID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TxtIDActionPerformed(evt);
             }
         });
 
@@ -108,36 +125,44 @@ public class AdminSalida extends javax.swing.JPanel {
             new String [] {
                 "IDENTIFICACION EMPLEADO", "TIPO DE SALIDA"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel9.setFont(new java.awt.Font("Footlight MT Light", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("INGRESE TIPO DE SALIDA :");
+        jLabel9.setText("TIPO DE SALIDA :");
         jLabel9.setToolTipText("");
 
-        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setFont(new java.awt.Font("Footlight MT Light", 1, 14)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACACIONES", "LICENCIA", "LICENCIA NO REMUNARADA" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        Comb2.setBackground(new java.awt.Color(255, 255, 255));
+        Comb2.setFont(new java.awt.Font("Footlight MT Light", 1, 14)); // NOI18N
+        Comb2.setForeground(new java.awt.Color(0, 0, 0));
+        Comb2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACACIONES", "LICENCIA" }));
+        Comb2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                Comb2ActionPerformed(evt);
             }
         });
 
-        jTextField4.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField4.setFont(new java.awt.Font("Footlight MT Light", 1, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        Txt1.setBackground(new java.awt.Color(255, 255, 255));
+        Txt1.setFont(new java.awt.Font("Footlight MT Light", 1, 14)); // NOI18N
+        Txt1.setForeground(new java.awt.Color(0, 0, 0));
+        Txt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                Txt1ActionPerformed(evt);
             }
         });
 
         jLabel10.setFont(new java.awt.Font("Footlight MT Light", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("INGRESE LA IDENTIFICACION :");
+        jLabel10.setText("IDENTIFICACION:");
         jLabel10.setToolTipText("");
 
         jButton2.setBackground(new java.awt.Color(0, 102, 0));
@@ -158,6 +183,15 @@ public class AdminSalida extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(0, 102, 102));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("LLENAR TABLA");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -171,12 +205,12 @@ public class AdminSalida extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(239, 239, 239)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtID, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(110, 110, 110)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(JTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(193, 193, 193)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,19 +220,22 @@ public class AdminSalida extends javax.swing.JPanel {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(110, 110, 110)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(Comb2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(72, 72, 72)
                                         .addComponent(jButton1)
                                         .addGap(176, 176, 176)
                                         .addComponent(jButton3))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton4)))))))
+                .addGap(133, 133, 133))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(200, 200, 200)
@@ -219,22 +256,27 @@ public class AdminSalida extends javax.swing.JPanel {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jButton4)))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Comb2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -272,36 +314,115 @@ public class AdminSalida extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       
+        try {
+    // Validar y parsear ID
+    int id;
+    try {
+        id = Integer.parseInt(TxtID.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El ID debe ser un número entero.");
+        return;
+    }
+
+    // Validar selección de salida del JComboBox
+    String tipoSalida = (String) JTwo.getSelectedItem();
+    if (tipoSalida == null || tipoSalida.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de salida.");
+        return;
+    }
+
+    // Crear instancia de Salida
+    Salida salida = new Salida(id, tipoSalida);
+
+    // Insertar la salida en la base de datos
+    SalidaDAO salidaDAO = new SalidaDAO();
+    salidaDAO.insert(salida);
+
+    // Mostrar mensaje de éxito
+    JOptionPane.showMessageDialog(null, "Salida insertada exitosamente.");
+    
+    // Limpiar campos
+    TxtID.setText("");
+    JTwo.setSelectedIndex(-1);
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
+}
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void Txt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_Txt1ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void Comb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Comb2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_Comb2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TxtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TxtIDActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void JTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTwoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_JTwoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+  
+    SalidaDAO salidaDAO  = new SalidaDAO(); // Reemplaza "SalidaDAO" con el nombre de tu clase DAO
+    List<Salida> listaSalidas = salidaDAO.getAll(); // Suponiendo que tienes un método getAll en tu SalidaDAO para obtener todos los registros
+
+    // Crear un nuevo modelo de tabla no editable
+    NonEditableTableModel model = new NonEditableTableModel();
+    model.setColumnIdentifiers(new Object[]{"ID Salida", "Tipo Salida"}); // Definir las columnas
+
+    // Llenar el modelo con los datos obtenidos
+    for (Salida salida : listaSalidas) {
+        model.addRow(new Object[]{salida.getId_salida(), salida.getTipo_salida()});
+    }
+
+    // Establecer el modelo en la tabla
+    jTable1.setModel(model);
+
+    // Agregar listener de selección a la tabla
+    jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        
+        public void valueChanged(ListSelectionEvent e) {
+            // Verificar si la selección cambió y no está ajustándose
+            if (!e.getValueIsAdjusting()) {
+                // Obtener la fila seleccionada
+                int selectedRow = jTable1.getSelectedRow();
+                if (selectedRow != -1) { // Si se seleccionó una fila
+                    // Obtener los valores de la fila seleccionada
+                    Object idSalida = jTable1.getValueAt(selectedRow, 0);
+                    Object tipoSalida = jTable1.getValueAt(selectedRow, 1);
+
+                    // Llenar el JTextField y el JComboBox con los valores obtenidos
+                    Txt1.setText(idSalida.toString()); // Suponiendo que txtField es un JTextField
+                    Comb2.setSelectedItem(tipoSalida); // Suponiendo que comboBox es un JComboBox
+                }
+            }
+        }
+    });
+
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Comb2;
+    private javax.swing.JComboBox<String> JTwo;
+    private javax.swing.JTextField Txt1;
+    private javax.swing.JTextField TxtID;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -312,7 +433,5 @@ public class AdminSalida extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

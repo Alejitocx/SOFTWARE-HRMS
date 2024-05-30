@@ -17,6 +17,7 @@ import java.sql.SQLException;
  * @author alejo
  */
 public class CargoDao {
+    
     Conexion con = new Conexion();
     private static final String INSERT_SQL = "INSERT INTO Cargo (idCargo, cargosDisponibles, salario) VALUES (?,?,?)";
     private static final String UPDATE_SQL = "UPDATE Cargo SET cargosDisponibles =?, salario =? WHERE idCargo =?";

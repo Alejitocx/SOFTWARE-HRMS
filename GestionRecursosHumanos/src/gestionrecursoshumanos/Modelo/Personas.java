@@ -11,86 +11,84 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Personas {
     @Id
-    private int idPersona;
-    private String nombreCompleto;
+    private int id_persona;
+    private String  nombre_Completo;
     private String telefono;
     private String profesion;
     private String direccion;
     private String email;
 
     @ManyToOne
-    private Categoria categoria;
-
-    // Constructor sin parámetros
-    public Personas() {
+    private Categoria tipo;
+    
+      public Personas() {
     }
-
-    // Constructor con parámetros
-    public Personas(int idPersona, String nombreCompleto, String telefono, String profesion, String direccion, String email, Categoria categoria) {
-        this.idPersona = idPersona;
-        this.nombreCompleto = nombreCompleto;
+     public Personas(int id_persona, String nombre_Completo, String telefono, String profesion, String direccion, String email, Categoria tipo) {
+        this.id_persona = id_persona;
+        this.nombre_Completo = nombre_Completo;
         this.telefono = telefono;
         this.profesion = profesion;
         this.direccion = direccion;
         this.email = email;
-        this.categoria = categoria;
+        this.tipo = tipo;
+    }
+     
+    public void setId_persona(int id_persona) {
+        this.id_persona = id_persona;
     }
 
-    // Getters and Setters
-    public int getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(int idPersona) {
-        this.idPersona = idPersona;
-    }
-
-    public String getNombreCompleto() {
-        return nombreCompleto;
-    }
-
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
-
-    public String getTelefono() {
-        return telefono;
+    public void setNombre_Completo(String nombre_Completo) {
+        this.nombre_Completo = nombre_Completo;
     }
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    public String getProfesion() {
-        return profesion;
-    }
-
     public void setProfesion(String profesion) {
         this.profesion = profesion;
-    }
-
-    public String getDireccion() {
-        return direccion;
     }
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public void setTipo(Categoria tipo) {
+        this.tipo = tipo;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public int getId_persona() {
+        return id_persona;
     }
+
+    public String getNombre_Completo() {
+        return nombre_Completo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getProfesion() {
+        return profesion;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Categoria getTipo() {
+        return tipo;
+    }
+
+    
 }
 

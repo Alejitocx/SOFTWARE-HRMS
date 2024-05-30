@@ -14,7 +14,7 @@ import java.time.LocalDate;
  * @author alejo
  */
 public class EvaluacionDao {
-    
+    Conexion con = new Conexion();
     public void insert(Evaluacion evaluacion) {
         String sql = "INSERT INTO Evaluacion (idEvaluacion, calificacion, convenio_id) VALUES (?, ?, ?)";
         try (Connection con = Conexion.ConnectionAS()) {

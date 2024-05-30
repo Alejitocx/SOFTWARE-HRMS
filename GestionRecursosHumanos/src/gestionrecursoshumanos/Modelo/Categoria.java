@@ -5,12 +5,14 @@
 package gestionrecursoshumanos.Modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 
 
 @Entity
 public class Categoria {
   
+    @Id
     private int idCategoria;
     private String tipo;
 

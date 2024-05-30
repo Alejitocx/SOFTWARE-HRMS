@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class ProcesoPersona {
     @Id
-    private int idProcesoPersona;
+    private int id_procesoPersona;
 
     @ManyToOne
     private Personas candidato;
@@ -19,24 +19,24 @@ public class ProcesoPersona {
     @ManyToOne
     private ProcesoSeleccion seleccion;
 
-    // Constructor sin parámetros
+    /// Constructor sin parámetros
     public ProcesoPersona() {
     }
 
     // Constructor con parámetros
     public ProcesoPersona(int idProcesoPersona, Personas candidato, ProcesoSeleccion seleccion) {
-        this.idProcesoPersona = idProcesoPersona;
+        this.id_procesoPersona = idProcesoPersona;
         this.candidato = candidato;
         this.seleccion = seleccion;
     }
 
-    // Getters and Setters
+    // Getters y Setters
     public int getIdProcesoPersona() {
-        return idProcesoPersona;
+        return id_procesoPersona;
     }
 
     public void setIdProcesoPersona(int idProcesoPersona) {
-        this.idProcesoPersona = idProcesoPersona;
+        this.id_procesoPersona = idProcesoPersona;
     }
 
     public Personas getCandidato() {

@@ -16,13 +16,14 @@ import java.sql.*;
  * @author alejo
  */
 public class HorasTrabajadasDAO {
-    public void insert(HorasTrabajadas horasTrabajadas) {
-        String sql = "INSERT INTO HorasTrabajadas (idHorasTrabajadas, horaInicio, horaSalida) VALUES (?, ?, ?)";
+    Conexion con = new Conexion();
+   public void insert(HorasTrabajadas horasTrabajadas) {
+        String sql = "INSERT INTO HorasTrabajadas (id_horasTrabajadas, hora_inicio, hora_salida) VALUES (?, ?, ?)";
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, horasTrabajadas.getIdHorasTrabajadas());
-            pst.setTime(2, Time.valueOf(horasTrabajadas.getHoraInicio()));
-            pst.setTime(3, Time.valueOf(horasTrabajadas.getHoraSalida()));
+            pst.setInt(1, horasTrabajadas.getId_horasTrabajadas());
+            pst.setInt(2, horasTrabajadas.getHora_inicio()); // Insertar como entero
+            pst.setInt(3, horasTrabajadas.getHora_salida()); // Insertar como entero
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -30,29 +31,29 @@ public class HorasTrabajadasDAO {
     }
 
     public void update(HorasTrabajadas horasTrabajadas) {
-        String sql = "UPDATE HorasTrabajadas SET horaInicio = ?, horaSalida = ? WHERE idHorasTrabajadas = ?";
+        String sql = "UPDATE HorasTrabajadas SET hora_inicio = ?, hora_salida = ? WHERE id_horasTrabajadas = ?";
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setTime(1, Time.valueOf(horasTrabajadas.getHoraInicio()));
-            pst.setTime(2, Time.valueOf(horasTrabajadas.getHoraSalida()));
-            pst.setInt(3, horasTrabajadas.getIdHorasTrabajadas());
+            pst.setInt(1, horasTrabajadas.getHora_inicio()); // Actualizar como entero
+            pst.setInt(2, horasTrabajadas.getHora_salida()); // Actualizar como entero
+            pst.setInt(3, horasTrabajadas.getId_horasTrabajadas());
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public HorasTrabajadas findById(int idHorasTrabajadas) {
+    public HorasTrabajadas findById(int id_horasTrabajadas) {
         HorasTrabajadas horasTrabajadas = null;
-        String sql = "SELECT * FROM HorasTrabajadas WHERE idHorasTrabajadas = ?";
+        String sql = "SELECT * FROM HorasTrabajadas WHERE id_horasTrabajadas = ?";
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, idHorasTrabajadas);
+            pst.setInt(1, id_horasTrabajadas);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                LocalTime horaInicio = rs.getTime("horaInicio").toLocalTime();
-                LocalTime horaSalida = rs.getTime("horaSalida").toLocalTime();
-                horasTrabajadas = new HorasTrabajadas(idHorasTrabajadas, horaInicio, horaSalida);
+                int hora_inicio = rs.getInt("hora_inicio"); // Obtener como entero
+                int hora_salida = rs.getInt("hora_salida"); // Obtener como entero
+                horasTrabajadas = new HorasTrabajadas(id_horasTrabajadas, hora_inicio, hora_salida);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,11 +61,11 @@ public class HorasTrabajadasDAO {
         return horasTrabajadas;
     }
 
-    public void delete(int idHorasTrabajadas) {
-        String sql = "DELETE FROM HorasTrabajadas WHERE idHorasTrabajadas = ?";
+    public void delete(int id_horasTrabajadas) {
+        String sql = "DELETE FROM HorasTrabajadas WHERE id_horasTrabajadas = ?";
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, idHorasTrabajadas);
+            pst.setInt(1, id_horasTrabajadas);
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

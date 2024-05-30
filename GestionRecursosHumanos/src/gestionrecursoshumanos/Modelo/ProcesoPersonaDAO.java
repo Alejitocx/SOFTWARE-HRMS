@@ -15,18 +15,19 @@ import java.sql.*;
  * @author alejo
  */
 public class ProcesoPersonaDAO {
+    Conexion con = new Conexion();
      // Método para insertar un nuevo ProcesoPersona en la base de datos
-    public void insertarProcesoPersona(ProcesoPersona procesoPersona) {
-        String sql = "INSERT INTO ProcesoPersona (idProcesoPersona, candidato_id, seleccion_id) VALUES (?, ?, ?)";
-        try (Connection con = Conexion.ConnectionAS()) {
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, procesoPersona.getIdProcesoPersona());
-            pst.setInt(2, procesoPersona.getCandidato().getIdPersona());
-            pst.setInt(3, procesoPersona.getSeleccion().getIdProceso());
-            pst.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static void insertarProcesoPersona(ProcesoPersona procesoPersona) {
+     String sql = "INSERT INTO ProcesoPersona (id_procesoPersona, candidato, seleccion) VALUES (?,?,?)";
+    try (Connection con = Conexion.ConnectionAS()) {
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, procesoPersona.getIdProcesoPersona());
+        pst.setInt(2, procesoPersona.getCandidato().getId_persona());
+        pst.setInt(3, procesoPersona.getSeleccion().getIdProceso());
+        pst.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
     }
 
     // Método para actualizar un ProcesoPersona existente en la base de datos
@@ -34,7 +35,7 @@ public class ProcesoPersonaDAO {
         String sql = "UPDATE ProcesoPersona SET candidato_id = ?, seleccion_id = ? WHERE idProcesoPersona = ?";
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, procesoPersona.getCandidato().getIdPersona());
+            pst.setInt(1, procesoPersona.getCandidato().getId_persona());
             pst.setInt(2, procesoPersona.getSeleccion().getIdProceso());
             pst.setInt(3, procesoPersona.getIdProcesoPersona());
             pst.executeUpdate();
@@ -79,7 +80,7 @@ public class ProcesoPersonaDAO {
     }
      private Personas buscarPersonaPorId(int id) {
         PersonasDAO personasDAO = new PersonasDAO();
-        return personasDAO.buscarPersonasPorId(id);
+        return personasDAO.findById(id);
     }
 
     

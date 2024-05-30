@@ -7,33 +7,34 @@ package gestionrecursoshumanos.Modelo;
 
 public class Salida {
    
-    private int idSalida;
-    private String tipoSalida;
+    private int id_salida;
+    private String tipo_salida;
 
     // Constructor sin parámetros
     public Salida() {
     }
 
     // Constructor con parámetros
-    public Salida(int idSalida, String tipoSalida) {
-        this.idSalida = idSalida;
-        this.tipoSalida = tipoSalida;
+    public Salida(int id_salida, String tipo_salida) {
+        this.id_salida = id_salida;
+        this.tipo_salida = tipo_salida;
     }
 
     // Getters and Setters
-    public int getIdSalida() {
-        return idSalida;
+    public int getId_salida() {
+        return id_salida;
     }
 
-    public void setIdSalida(int idSalida) {
-        this.idSalida = idSalida;
+    public void setId_salida(int id_salida) {
+        this.id_salida = id_salida;
     }
 
-    public String getTipoSalida() {
-        return tipoSalida;
+    public String getTipo_salida() {
+        return tipo_salida;
     }
 
-    public void setTipoSalida(String tipoSalida) {
-        this.tipoSalida = tipoSalida;
+    public void setTipo_salida(String tipo_salida) {
+        this.tipo_salida = tipo_salida;
     }
 }
+

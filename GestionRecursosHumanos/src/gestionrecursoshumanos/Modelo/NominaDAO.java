@@ -46,8 +46,8 @@ public class NominaDAO {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, nomina.getIdNomina());
             pst.setFloat(2, nomina.getPagoNomina());
-            pst.setInt(3, nomina.getHorasTrabajo().getIdHorasTrabajadas());
-            pst.setInt(4, nomina.getMotivoSalida().getIdSalida());
+            pst.setInt(3, nomina.getHorasTrabajo().getId_horasTrabajadas());
+            pst.setInt(4, nomina.getMotivoSalida().getId_salida());
             pst.setInt(5, nomina.getConvenio().getIdContrato());
             creado = pst.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -63,8 +63,8 @@ public class NominaDAO {
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setFloat(1, nomina.getPagoNomina());
-            pst.setInt(2, nomina.getHorasTrabajo().getIdHorasTrabajadas());
-            pst.setInt(3, nomina.getMotivoSalida().getIdSalida());
+            pst.setInt(2, nomina.getHorasTrabajo().getId_horasTrabajadas());
+            pst.setInt(3, nomina.getMotivoSalida().getId_salida());
             pst.setInt(4, nomina.getConvenio().getIdContrato());
             pst.setInt(5, nomina.getIdNomina());
             actualizado = pst.executeUpdate() > 0;
