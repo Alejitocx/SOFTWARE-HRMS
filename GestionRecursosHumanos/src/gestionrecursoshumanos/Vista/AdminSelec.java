@@ -9,9 +9,7 @@ import gestionrecursoshumanos.Modelo.Cargo;
 import gestionrecursoshumanos.Modelo.Personas;
 import gestionrecursoshumanos.Modelo.PersonasDAO;
 import gestionrecursoshumanos.Modelo.ProcesoPersona;
-import gestionrecursoshumanos.Modelo.ProcesoPersonaDAO;
-import gestionrecursoshumanos.Modelo.ProcesoSeleccion;
-import gestionrecursoshumanos.Modelo.CargoDao;
+import static gestionrecursoshumanos.Modelo.ProcesoPersonaDAO.insertarProcesoPersona;
 import gestionrecursoshumanos.Modelo.ProcesoSeleccionDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -116,18 +114,18 @@ public class AdminSelec extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID DE PERSONA", "ASPIRANTE", "TELEFONO", "PROFESION", "DIRECCION", "EMAIL", "CATEGORIA"
+                "ID DE PERSONA", "ASPIRANTE", "TELEFONO", "PROFESION", "DIRECCION", "EMAIL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -174,8 +172,8 @@ public class AdminSelec extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jButton3)
-                        .addGap(95, 95, 95)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(381, 381, 381)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,6 +212,10 @@ public class AdminSelec extends javax.swing.JPanel {
                 .addGap(99, 99, 99)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(443, 443, 443)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -231,11 +233,7 @@ public class AdminSelec extends javax.swing.JPanel {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(443, 443, 443)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(141, 141, 141)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -257,34 +255,57 @@ public class AdminSelec extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- // Obtener el ID de proceso persona ingresado por el usuario
-// Obtener el ID de proceso persona ingresado por el usuario
-int procesoPersonaId = Integer.parseInt(JtextId.getText());
+ // Obtiene el valor del JTextField para el número de proceso
+String numeroProcesoStr = JtextId.getText();
+int numeroProceso = 0;
+if (!numeroProcesoStr.isEmpty()) {
+    try {
+        numeroProceso = Integer.parseInt(numeroProcesoStr.trim());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el número de proceso.");
+        return; // Sal de este método si el input no es un número
+    }
+}
 
-// Obtener el ID de persona ingresado por el usuario
-int personaId = Integer.parseInt(TxtIdper.getText());
+// Obtiene el valor del JTextField para el ID de la persona
+String idPersonaStr = TxtIdper.getText();
+int idPersona = 0;
+if (!idPersonaStr.isEmpty()) {
+    try {
+        idPersona = Integer.parseInt(idPersonaStr.trim());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID de la persona.");
+        return; // Sal de este método si el input no es un número
+    }
+}
 
-// Obtener el cargo seleccionado del JComboBox y hacer un casting a Cargo
-Cargo cargoSeleccionado = (Cargo) jComboBox1.getSelectedItem();
-
-// Crear un nuevo objeto ProcesoSeleccion con los datos obtenidos
-ProcesoSeleccion procesoSeleccion = new ProcesoSeleccion();
-procesoSeleccion.setIdProceso(cargoSeleccionado.getIdCargo()); // Asumiendo que getIdCargo() es el método correcto para obtener el ID del cargo
-
-// Obtener la persona de la base de datos
-Personas personaEncontrada = new PersonasDAO().findById(personaId);
-
-// Crear un nuevo objeto ProcesoPersona con los datos obtenidos
-ProcesoPersona procesoPersona = new ProcesoPersona();
-procesoPersona.setIdProcesoPersona(procesoPersonaId);
-procesoPersona.setCandidato(personaEncontrada);
-procesoPersona.setSeleccion(procesoSeleccion); // Asumiendo que setSeleccion() acepta un ProcesoSeleccion
-
-// Insertar el proceso persona en la base de datos
-ProcesoPersonaDAO.insertarProcesoPersona(procesoPersona);
-
-// Mostrar mensaje de éxito
-JOptionPane.showMessageDialog(this, "Proceso Persona guardado exitosamente.");
+// Verifica si el ID de la persona existe en la base de datos
+Personas persona = findById(idPersona);
+if (persona!= null) {
+    // El ID existe, procede a crear el objeto ProcesoPersona
+    ProcesoPersona procesoPersona = new ProcesoPersona();
+    procesoPersona.setIdProcesoPersona(numeroProceso); // Asume que tienes un método setNumeroProceso
+    procesoPersona.setCandidato(persona);
+    
+    // Obtiene la selección del JComboBox
+    String seleccionStr = cboSeleccion.getSelectedItem().toString();
+    int seleccionId = 0;
+    try {
+        seleccionId = Integer.parseInt(seleccionStr.trim());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "La selección debe ser un número válido.");
+        return; // Sal de este método si la selección no es un número
+    }
+    
+    // Asigna la selección obtenida del JComboBox
+    procesoPersona.setSeleccion(seleccionId); // Asume que tienes un método setSeleccion
+    
+    // Inserta el nuevo registro en la tabla ProcesoPersona
+    insertarProcesoPersona(procesoPersona);
+    JOptionPane.showMessageDialog(null, "Registro insertado exitosamente.");
+} else {
+    JOptionPane.showMessageDialog(null, "ID de persona no encontrado.");
+}
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -301,11 +322,11 @@ JOptionPane.showMessageDialog(this, "Proceso Persona guardado exitosamente.");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-     try {
+    try {
     // Crear instancia de PersonasDAO
     PersonasDAO personasDAO = new PersonasDAO();
     // Obtener la lista de todas las personas
-    List<Personas> lista = personasDAO.listarTodos();
+    List<Personas> lista = personasDAO.findAll(); // Usamos findAll()
 
     // Obtener el modelo de la tabla
     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -321,14 +342,13 @@ JOptionPane.showMessageDialog(this, "Proceso Persona guardado exitosamente.");
             persona.getProfesion(),
             persona.getDireccion(),
             persona.getEmail(),
-            persona.getTipo()
+          
         });
     }
 } catch (Exception e) {
     e.printStackTrace();
     JOptionPane.showMessageDialog(null, "Error al cargar datos: " + e.getMessage());
 }
-
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

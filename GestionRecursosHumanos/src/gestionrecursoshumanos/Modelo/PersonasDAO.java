@@ -56,9 +56,9 @@ public class PersonasDAO {
     }
 }
 
-public Personas findById(int idPersona) {
-    Personas persona = null;
-    String sql = "SELECT * FROM Personas WHERE idPersona =?";
+
+  public Personas findById(int idPersona) {
+    String sql = "SELECT * FROM Personas WHERE id_persona =?";
     try (Connection con = Conexion.ConnectionAS()) {
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setInt(1, idPersona);
@@ -71,13 +71,14 @@ public Personas findById(int idPersona) {
             String email = rs.getString("email");
             int categoriaId = rs.getInt("categoria_id");
 
-            Categoria categoria = buscarCategoriaPorId(categoriaId); // Método existente
-            persona = new Personas(idPersona, nombreCompleto, telefono, profesion, direccion, email, categoria);
+            // Asumiendo que tienes un método para buscar la categoría por ID
+            Categoria categoria = buscarCategoriaPorId(categoriaId);
+            return new Personas(idPersona, nombreCompleto, telefono, profesion, direccion, email, categoria);
         }
     } catch (SQLException e) {
         e.printStackTrace();
     }
-    return persona;
+    return null;
 }
 
 public void delete(int idPersona) {
@@ -93,7 +94,7 @@ public void delete(int idPersona) {
 
 private Categoria buscarCategoriaPorId(int id) {
     Categoria categoria = null;
-    String sql = "SELECT * FROM Categoria WHERE idCategoria =?";
+    String sql = "SELECT * FROM Categoria WHERE id_categoria =?";
     try (Connection con = Conexion.ConnectionAS()) {
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setInt(1, id);
@@ -108,30 +109,29 @@ private Categoria buscarCategoriaPorId(int id) {
     }
     return categoria;
 }
-public List<Personas> listarTodos() {
-        List<Personas> listaPersonas = new ArrayList<>();
-        String sql = "SELECT * FROM Personas";
-        try (Connection con = Conexion.ConnectionAS()) {
-            PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                int idPersona = rs.getInt("id_persona");
-                String nombreCompleto = rs.getString("nombre_Completo");
-                String telefono = rs.getString("telefono");
-                String profesion = rs.getString("profesion");
-                String direccion = rs.getString("direccion");
-                String email = rs.getString("email");
-                int categoriaId = rs.getInt("id_categoria");
+public List<Personas> findAll() {
+    List<Personas> listaPersonas = new ArrayList<>();
+    String sql = "SELECT * FROM Personas";
+    try (Connection con = Conexion.ConnectionAS()) {
+        PreparedStatement pst = con.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            int idPersona = rs.getInt("id_persona");
+            String nombreCompleto = rs.getString("nombre_Completo");
+            String telefono = rs.getString("telefono");
+            String profesion = rs.getString("profesion");
+            String direccion = rs.getString("direccion");
+            String email = rs.getString("email");
+            int categoriaId = rs.getInt("categoria");
 
-                Categoria categoria = buscarCategoriaPorId(categoriaId); // Método existente
-                Personas persona = new Personas(idPersona, nombreCompleto, telefono, profesion, direccion, email, categoria);
-                listaPersonas.add(persona);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            Categoria categoria = buscarCategoriaPorId(categoriaId); // Método existente
+            Personas persona = new Personas(idPersona, nombreCompleto, telefono, profesion, direccion, email, categoria);
+            listaPersonas.add(persona);
         }
-        return listaPersonas;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
-
+    return listaPersonas;
+}
 
 }
