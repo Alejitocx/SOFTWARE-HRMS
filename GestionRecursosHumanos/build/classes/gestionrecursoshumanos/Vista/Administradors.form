@@ -153,9 +153,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel4" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel3" alignment="3" min="-2" pref="0" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel5" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" pref="0" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="378" max="-2" attributes="0"/>
                       </Group>
@@ -227,37 +227,31 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btn_lends3" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="btn_lends2" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="btn_lends4" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="btn_lends6" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="btn_lends5" alignment="0" min="-2" pref="386" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="btn_lends8" min="-2" pref="386" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btn_lends3" min="-2" pref="386" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                      <Component id="appName1" min="-2" pref="127" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="167" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btn_lends7" min="-2" pref="386" max="-2" attributes="0"/>
+                          <Component id="btn_lends6" min="-2" pref="386" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btn_lends2" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btn_lends4" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btn_lends5" alignment="0" min="-2" pref="386" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="btn_lends8" alignment="0" min="-2" pref="386" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                              <Component id="appName1" min="-2" pref="127" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btn_lends7" alignment="0" min="-2" pref="386" max="-2" attributes="0"/>
+                          <Component id="btn_lends9" alignment="0" min="-2" pref="386" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -269,13 +263,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_lends3" min="-2" pref="52" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btn_lends6" min="-2" pref="52" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Component id="btn_lends5" min="-2" pref="52" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_lends2" min="-2" pref="52" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="btn_lends4" min="-2" pref="52" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btn_lends5" min="-2" pref="52" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="btn_lends6" min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="btn_lends9" min="-2" pref="52" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btn_lends8" min="-2" pref="52" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -422,9 +418,9 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/gestionrecursoshumanos/Img/evaluacion.png"/>
+                  <Image iconType="3" name="/gestionrecursoshumanos/Img/contrato.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="MODULO DE CALIFICACION "/>
+                <Property name="text" type="java.lang.String" value="REGISTRO EMPLEADO"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                     <MatteColorBorder bottom="1" left="13" right="1" top="1"/>
@@ -540,6 +536,39 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_lends7ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_lends9">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI Semibold" size="14" style="3"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/gestionrecursoshumanos/Img/evaluacion.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="MODULO DE CALIFICACION "/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+                    <MatteColorBorder bottom="1" left="13" right="1" top="1"/>
+                  </Border>
+                </Property>
+                <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Default Cursor"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="iconTextGap" type="int" value="13"/>
+                <Property name="inheritsPopupMenu" type="boolean" value="true"/>
+                <Property name="opaque" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_lends9ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

@@ -4,33 +4,18 @@
  */
 package gestionrecursoshumanos.Vista;
 
-import gestionrecursoshumanos.Modelo.Cargo;
-
-import gestionrecursoshumanos.Modelo.Personas;
-import gestionrecursoshumanos.Modelo.PersonasDAO;
-import gestionrecursoshumanos.Modelo.ProcesoPersona;
-import gestionrecursoshumanos.Modelo.ProcesoPersonaDAO;
-import gestionrecursoshumanos.Modelo.ProcesoSeleccion;
-import gestionrecursoshumanos.Modelo.ProcesoSeleccionDAO;
-import java.sql.SQLException;
-import java.util.List;
-import javax.swing.JOptionPane;
-
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author alejo
  */
-public class AdminSelec extends javax.swing.JPanel {
+public class AdminCont extends javax.swing.JPanel {
 
     /**
-     * Creates new form AdminSelec
+     * Creates new form AdminCak
      */
-    public AdminSelec() {
+    public AdminCont() {
         initComponents();
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,7 +26,6 @@ public class AdminSelec extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -57,8 +41,6 @@ public class AdminSelec extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-
-        jCheckBox1.setText("jCheckBox1");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setMaximumSize(new java.awt.Dimension(1097, 817));
@@ -110,18 +92,17 @@ public class AdminSelec extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID DE PERSONA", "ASPIRANTE", "TELEFONO", "PROFESION", "DIRECCION", "EMAIL"
+                "ID PROCESO DE PERSONA", "CANDIDATO", "SELECCION"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -142,7 +123,7 @@ public class AdminSelec extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 1, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("SELECCION DE ASPIRANTES");
+        jLabel8.setText("CONTRATACION");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
@@ -171,17 +152,6 @@ public class AdminSelec extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(1050, 1050, 1050))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(373, 373, 373)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(142, 142, 142)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jButton5)
@@ -202,25 +172,39 @@ public class AdminSelec extends javax.swing.JPanel {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(101, 101, 101))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(373, 373, 373)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(142, 142, 142)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(311, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(279, 279, 279)))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(33, 33, 33)
-                    .addComponent(jButton4)
-                    .addContainerGap(989, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(125, 125, 125)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,11 +227,6 @@ public class AdminSelec extends javax.swing.JPanel {
                     .addGap(46, 46, 46)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(726, Short.MAX_VALUE)))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(182, 182, 182)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(590, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -262,181 +241,180 @@ public class AdminSelec extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     // Obtener el ID de proceso persona ingresado por el usuario
-    String numeroProcesoStr = JtextId.getText();
-    int numeroProceso = 0;
-    if (!numeroProcesoStr.isEmpty()) {
-        try {
-            numeroProceso = Integer.parseInt(numeroProcesoStr.trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el número de proceso.");
-            return; // Sal de este método si el input no es un número
-        }
-    }
-
-    // Verificar si el ID de proceso persona ya existe en la base de datos
-    ProcesoPersona existente = new ProcesoPersonaDAO().buscarProcesoPersonaPorId(numeroProceso);
-    if (existente != null) {
-        JOptionPane.showMessageDialog(null, "El ID del proceso ya existe. Por favor, ingrese un ID único.", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Sal de este método si el ID ya existe
-    }
-
-    // Obtener el ID de persona ingresado por el usuario
-    String idPersonaStr = TxtIdper.getText();
-    int idPersona = 0;
-    if (!idPersonaStr.isEmpty()) {
-        try {
-            idPersona = Integer.parseInt(idPersonaStr.trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID de la persona.");
-            return; // Sal de este método si el input no es un número
-        }
-    }
-
-    // Verifica si el ID de la persona existe en la base de datos
-    Personas personaEncontrada = new PersonasDAO().findById(idPersona);
-    if (personaEncontrada == null) {
-        // Indicar al usuario que la persona no fue encontrada
-        JOptionPane.showMessageDialog(null, "La persona no fue encontrada en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    // Obtener la selección del JComboBox
-    String seleccionStr = jComboBox1.getSelectedItem().toString();
-    int seleccionId = 0;
-    try {
-        seleccionId = Integer.parseInt(seleccionStr.trim());
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "La selección debe ser un número válido.");
-        return; // Sal de este método si la selección no es un número
-    }
-
-    // Verifica si el ID del proceso de selección existe en la base de datos
-    ProcesoSeleccion seleccionObj = new ProcesoSeleccionDAO().buscarProcesoSeleccionPorId(seleccionId);
-    if (seleccionObj == null) {
-        JOptionPane.showMessageDialog(null, "El proceso de selección no fue encontrado en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    // Crear un nuevo objeto ProcesoPersona con los datos obtenidos
-    ProcesoPersona procesoPersona = new ProcesoPersona();
-    procesoPersona.setIdProcesoPersona(numeroProceso);
-    procesoPersona.setCandidato(personaEncontrada);
-    procesoPersona.setSeleccion(seleccionObj);
-
-    // Insertar el proceso persona en la base de datos
-    new ProcesoPersonaDAO().insertarProcesoPersona(procesoPersona);
-
-    // Mostrar mensaje de éxito
-    JOptionPane.showMessageDialog(null, "Registro insertado exitosamente.");
-
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void TxtIdperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdperActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtIdperActionPerformed
-
     private void JtextIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JtextIdActionPerformed
 
         JOptionPane.showMessageDialog(null, "EL ID DEL PROCESO DEBE SER IGUAL A LA IDENTIFICACION DE LA PERSONA.");
         // TODO add your handling code here:
     }//GEN-LAST:event_JtextIdActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- String idPersonaStr = TxtIdper.getText().trim();
+    private void TxtIdperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdperActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtIdperActionPerformed
 
-    if (!idPersonaStr.isEmpty()) {
-        try {
-            int idPersona = Integer.parseInt(idPersonaStr);
-
-            // Crear instancia de PersonasDAO
-            PersonasDAO personasDAO = new PersonasDAO();
-            Personas persona = personasDAO.findById(idPersona);
-
-            // Verificar si la persona existe
-            if (persona == null) {
-                JOptionPane.showMessageDialog(null, "El ID de persona no existe en la base de datos.");
-                return;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Obtener el ID de proceso persona ingresado por el usuario
+        String numeroProcesoStr = JtextId.getText();
+        int numeroProceso = 0;
+        if (!numeroProcesoStr.isEmpty()) {
+            try {
+                numeroProceso = Integer.parseInt(numeroProcesoStr.trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el número de proceso.");
+                return; // Sal de este método si el input no es un número
             }
-
-            // Confirmación de eliminación
-            int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas eliminar esta persona?", "Confirmación", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                // Eliminar la persona
-                personasDAO.eliminarPersona(idPersona);
-
-                // Actualizar la tabla
-                actualizarTablaPersonas(personasDAO);
-
-                JOptionPane.showMessageDialog(null, "Persona eliminada exitosamente.");
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID de la persona.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al eliminar la persona: " + e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
         }
-    } else {
-        JOptionPane.showMessageDialog(null, "Por favor, ingrese el ID de la persona.");
-    }
-}
 
-// Método para actualizar la tabla de personas
-private void actualizarTablaPersonas(PersonasDAO personasDAO) {
-    List<Personas> lista = personasDAO.findAll();
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    model.setRowCount(0);
-    for (Personas persona : lista) {
-        model.addRow(new Object[]{
-            persona.getId_persona(),
-            persona.getNombre_Completo(),
-            persona.getTelefono(),
-            persona.getProfesion(),
-            persona.getDireccion(),
-            persona.getEmail(),
-        });
-    }
+        // Verificar si el ID de proceso persona ya existe en la base de datos
+        ProcesoPersona existente = new ProcesoPersonaDAO().buscarProcesoPersonaPorId(numeroProceso);
+        if (existente != null) {
+            JOptionPane.showMessageDialog(null, "El ID del proceso ya existe. Por favor, ingrese un ID único.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Sal de este método si el ID ya existe
+        }
+
+        // Obtener el ID de persona ingresado por el usuario
+        String idPersonaStr = TxtIdper.getText();
+        int idPersona = 0;
+        if (!idPersonaStr.isEmpty()) {
+            try {
+                idPersona = Integer.parseInt(idPersonaStr.trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID de la persona.");
+                return; // Sal de este método si el input no es un número
+            }
+        }
+
+        // Verifica si el ID de la persona existe en la base de datos
+        Personas personaEncontrada = new PersonasDAO().findById(idPersona);
+        if (personaEncontrada == null) {
+            // Indicar al usuario que la persona no fue encontrada
+            JOptionPane.showMessageDialog(null, "La persona no fue encontrada en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Obtener la selección del JComboBox
+        String seleccionStr = jComboBox1.getSelectedItem().toString();
+        int seleccionId = 0;
+        try {
+            seleccionId = Integer.parseInt(seleccionStr.trim());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "La selección debe ser un número válido.");
+            return; // Sal de este método si la selección no es un número
+        }
+
+        // Verifica si el ID del proceso de selección existe en la base de datos
+        ProcesoSeleccion seleccionObj = new ProcesoSeleccionDAO().buscarProcesoSeleccionPorId(seleccionId);
+        if (seleccionObj == null) {
+            JOptionPane.showMessageDialog(null, "El proceso de selección no fue encontrado en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear un nuevo objeto ProcesoPersona con los datos obtenidos
+        ProcesoPersona procesoPersona = new ProcesoPersona();
+        procesoPersona.setIdProcesoPersona(numeroProceso);
+        procesoPersona.setCandidato(personaEncontrada);
+        procesoPersona.setSeleccion(seleccionObj);
+
+        // Insertar el proceso persona en la base de datos
+        new ProcesoPersonaDAO().insertarProcesoPersona(procesoPersona);
+
+        // Mostrar mensaje de éxito
+        JOptionPane.showMessageDialog(null, "Registro insertado exitosamente.");
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String idPersonaStr = TxtIdper.getText().trim();
+
+        if (!idPersonaStr.isEmpty()) {
+            try {
+                int idPersona = Integer.parseInt(idPersonaStr);
+
+                // Crear instancia de PersonasDAO
+                PersonasDAO personasDAO = new PersonasDAO();
+                Personas persona = personasDAO.findById(idPersona);
+
+                // Verificar si la persona existe
+                if (persona == null) {
+                    JOptionPane.showMessageDialog(null, "El ID de persona no existe en la base de datos.");
+                    return;
+                }
+
+                // Confirmación de eliminación
+                int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas eliminar esta persona?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    // Eliminar la persona
+                    personasDAO.eliminarPersona(idPersona);
+
+                    // Actualizar la tabla
+                    actualizarTablaPersonas(personasDAO);
+
+                    JOptionPane.showMessageDialog(null, "Persona eliminada exitosamente.");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID de la persona.");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error al eliminar la persona: " + e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese el ID de la persona.");
+        }
+        }
+
+        // Método para actualizar la tabla de personas
+        private void actualizarTablaPersonas(PersonasDAO personasDAO) {
+            List<Personas> lista = personasDAO.findAll();
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            for (Personas persona : lista) {
+                model.addRow(new Object[]{
+                    persona.getId_persona(),
+                    persona.getNombre_Completo(),
+                    persona.getTelefono(),
+                    persona.getProfesion(),
+                    persona.getDireccion(),
+                    persona.getEmail(),
+                });
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-          try {
-    // Crear instancia de PersonasDAO
-    PersonasDAO personasDAO = new PersonasDAO();
-    // Obtener la lista de todas las personas
-    List<Personas> lista = personasDAO.findAll(); // Usamos findAll()
+        try {
+            // Crear instancia de PersonasDAO
+            PersonasDAO personasDAO = new PersonasDAO();
+            // Obtener la lista de todas las personas
+            List<Personas> lista = personasDAO.findAll(); // Usamos findAll()
 
-    // Obtener el modelo de la tabla
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    // Limpiar tabla existente
-    model.setRowCount(0);
+            // Obtener el modelo de la tabla
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            // Limpiar tabla existente
+            model.setRowCount(0);
 
-    // Recorrer la lista de personas y agregar cada persona como una fila en la tabla
-    for (Personas persona : lista) {
-        model.addRow(new Object[]{
-            persona.getId_persona(),
-            persona.getNombre_Completo(),
-            persona.getTelefono(),
-            persona.getProfesion(),
-            persona.getDireccion(),
-            persona.getEmail(),
-          
-        });
-    }
-} catch (Exception e) {
-    e.printStackTrace();
-    JOptionPane.showMessageDialog(null, "Error al cargar datos: " + e.getMessage());
-}
+            // Recorrer la lista de personas y agregar cada persona como una fila en la tabla
+            for (Personas persona : lista) {
+                model.addRow(new Object[]{
+                    persona.getId_persona(),
+                    persona.getNombre_Completo(),
+                    persona.getTelefono(),
+                    persona.getProfesion(),
+                    persona.getDireccion(),
+                    persona.getEmail(),
+
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar datos: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextId;
@@ -445,7 +423,6 @@ private void actualizarTablaPersonas(PersonasDAO personasDAO) {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

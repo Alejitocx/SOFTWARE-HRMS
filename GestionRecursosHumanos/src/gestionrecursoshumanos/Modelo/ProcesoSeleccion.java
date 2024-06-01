@@ -17,7 +17,7 @@ public class ProcesoSeleccion {
     private Cargo funcion;
 
     // Constructor sin parámetros
-    public ProcesoSeleccion() {
+    public ProcesoSeleccion(int seleccionId) {
     }
 
     // Constructor con parámetros

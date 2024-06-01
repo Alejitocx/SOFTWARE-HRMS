@@ -46,7 +46,7 @@ public class ProcesoPersonaDAO {
 
     // Método para eliminar un ProcesoPersona de la base de datos
     public void eliminarProcesoPersona(int idProcesoPersona) {
-        String sql = "DELETE FROM ProcesoPersona WHERE idProcesoPersona = ?";
+        String sql = "DELETE FROM ProcesoPersona WHERE id_procesoPersona = ?";
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idProcesoPersona);
@@ -57,19 +57,19 @@ public class ProcesoPersonaDAO {
     }
 
     // Método para buscar un ProcesoPersona por su ID
-    public ProcesoPersona buscarProcesoPersonaPorId(int id) {
+   public ProcesoPersona buscarProcesoPersonaPorId(int id) {
         ProcesoPersona procesoPersona = null;
-        String sql = "SELECT * FROM ProcesoPersona WHERE idProcesoPersona = ?";
+        String sql = "SELECT * FROM ProcesoPersona WHERE id_procesoPersona = ?";
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                int idProcesoPersona = rs.getInt("idProcesoPersona");
-                int candidatoId = rs.getInt("candidato_id");
-                int seleccionId = rs.getInt("seleccion_id");
-                Personas candidato = buscarPersonaPorId(candidatoId);
-                ProcesoSeleccion seleccion = buscarProcesoSeleccionPorId(seleccionId);
+                int idProcesoPersona = rs.getInt("id_procesoPersona");
+                int candidatoId = rs.getInt("candidato");
+                int seleccionId = rs.getInt("seleccion");
+                Personas candidato = new PersonasDAO().findById(candidatoId);
+                ProcesoSeleccion seleccion = new ProcesoSeleccionDAO().buscarProcesoSeleccionPorId(seleccionId);
 
                 procesoPersona = new ProcesoPersona(idProcesoPersona, candidato, seleccion);
             }

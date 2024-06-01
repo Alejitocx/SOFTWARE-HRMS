@@ -1,4 +1,4 @@
-create table DescuentoLey(
+ create table DescuentoLey(
       id_descuento  int  primary key,
       tipo_descuento VARCHAR(15),
 	  porsentaje float
@@ -54,6 +54,7 @@ create table Personas(
       categoria INT,
       FOREIGN KEY (categoria) REFERENCES Categoria (id_categoria)
 );
+select * from Personas;
 
 create table ProcesoSeleccion(
       id_proceso  INT  PRIMARY KEY,
@@ -77,7 +78,8 @@ create table ProcesoPersona(
        FOREIGN KEY (seleccion) REFERENCES ProcesoSeleccion (id_proceso)
 );
 
-
+select * from ProcesoPersona;
+delete  from ProcesoPersona;
 
 create table Contrato(
       id_contrato  int  primary key,

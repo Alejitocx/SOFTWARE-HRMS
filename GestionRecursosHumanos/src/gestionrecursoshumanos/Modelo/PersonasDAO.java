@@ -64,12 +64,12 @@ public class PersonasDAO {
         pst.setInt(1, idPersona);
         ResultSet rs = pst.executeQuery();
         if (rs.next()) {
-            String nombreCompleto = rs.getString("nombreCompleto");
+            String nombreCompleto = rs.getString("nombre_Completo");
             String telefono = rs.getString("telefono");
             String profesion = rs.getString("profesion");
             String direccion = rs.getString("direccion");
             String email = rs.getString("email");
-            int categoriaId = rs.getInt("categoria_id");
+            int categoriaId = rs.getInt("categoria");
 
             // Asumiendo que tienes un método para buscar la categoría por ID
             Categoria categoria = buscarCategoriaPorId(categoriaId);
@@ -81,16 +81,24 @@ public class PersonasDAO {
     return null;
 }
 
-public void delete(int idPersona) {
-    String sql = "DELETE FROM Personas WHERE idPersona =?";
-    try (Connection con = Conexion.ConnectionAS()) {
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setInt(1, idPersona);
-        pst.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
+
+   // Método para eliminar una persona por ID
+    public void eliminarPersona(int idPersona) throws SQLException {
+        String sqlDeletePersona = "DELETE FROM Personas WHERE id_persona = ?";
+
+        try (Connection con = Conexion.ConnectionAS();
+             PreparedStatement pst = con.prepareStatement(sqlDeletePersona)) {
+
+            pst.setInt(1, idPersona);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
-}
+
+    
+
 
 private Categoria buscarCategoriaPorId(int id) {
     Categoria categoria = null;
@@ -110,28 +118,29 @@ private Categoria buscarCategoriaPorId(int id) {
     return categoria;
 }
 public List<Personas> findAll() {
-    List<Personas> listaPersonas = new ArrayList<>();
-    String sql = "SELECT * FROM Personas";
-    try (Connection con = Conexion.ConnectionAS()) {
-        PreparedStatement pst = con.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
-        while (rs.next()) {
-            int idPersona = rs.getInt("id_persona");
-            String nombreCompleto = rs.getString("nombre_Completo");
-            String telefono = rs.getString("telefono");
-            String profesion = rs.getString("profesion");
-            String direccion = rs.getString("direccion");
-            String email = rs.getString("email");
-            int categoriaId = rs.getInt("categoria");
+        List<Personas> listaPersonas = new ArrayList<>();
+        String sql = "SELECT * FROM Personas";
+        try (Connection con = Conexion.ConnectionAS();
+             PreparedStatement pst = con.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
 
-            Categoria categoria = buscarCategoriaPorId(categoriaId); // Método existente
-            Personas persona = new Personas(idPersona, nombreCompleto, telefono, profesion, direccion, email, categoria);
-            listaPersonas.add(persona);
+            while (rs.next()) {
+                int idPersona = rs.getInt("id_persona");
+                String nombreCompleto = rs.getString("nombre_Completo");
+                String telefono = rs.getString("telefono");
+                String profesion = rs.getString("profesion");
+                String direccion = rs.getString("direccion");
+                String email = rs.getString("email");
+                int categoriaId = rs.getInt("categoria");
+
+                Categoria categoria = buscarCategoriaPorId(categoriaId); // Método existente
+                Personas persona = new Personas(idPersona, nombreCompleto, telefono, profesion, direccion, email, categoria);
+                listaPersonas.add(persona);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return listaPersonas;
     }
-    return listaPersonas;
-}
 
 }

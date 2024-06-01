@@ -43,13 +43,13 @@ public class ProcesoSeleccionDAO {
 
     public ProcesoSeleccion findById(int idProceso) {
         ProcesoSeleccion procesoSeleccion = null;
-        String sql = "SELECT * FROM ProcesoSeleccion WHERE idProceso = ?";
+        String sql = "SELECT * FROM ProcesoSeleccion WHERE id_proceso  = ?";
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, idProceso);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                int funcionId = rs.getInt("funcion_id");
+                int funcionId = rs.getInt("funcion");
                 Cargo funcion = buscarCargoPorId(funcionId);
                 procesoSeleccion = new ProcesoSeleccion(idProceso, funcion);
             }
@@ -88,7 +88,22 @@ public class ProcesoSeleccionDAO {
         return cargo;
     }
 
-    ProcesoSeleccion buscarProcesoSeleccionPorId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ProcesoSeleccion buscarProcesoSeleccionPorId(int id) {
+        ProcesoSeleccion procesoSeleccion = null;
+        String sql = "SELECT * FROM ProcesoSeleccion WHERE id_proceso = ?";
+        try (Connection con = Conexion.ConnectionAS()) {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                int idProcesoSeleccion = rs.getInt("id_proceso");
+                // Crear el objeto ProcesoSeleccion
+                procesoSeleccion = new ProcesoSeleccion(idProcesoSeleccion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return procesoSeleccion;
     }
+    
 }
