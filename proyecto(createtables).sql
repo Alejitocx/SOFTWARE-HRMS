@@ -13,11 +13,24 @@ VALUES
 
 
 create table HorasTrabajadas(
-     id_horasTrabajadas  int  primary key,
-     hora_inicio int,
-     hora_salida int
-    
+    id_horasTrabajadas  int  primary key,
+    horas_totales int,
+	ID_CONTRATO INT,
+    FOREIGN KEY (ID_CONTRATO) REFERENCES Contrato(id_contrato)
 );
+select * from HorasTrabajadas;
+-- Eliminar las columnas hora_inicio y hora_salida
+ALTER TABLE HorasTrabajadas
+DROP COLUMN hora_inicio,
+DROP COLUMN hora_salida;
+
+-- Agregar la columna horas_totales
+ALTER TABLE HorasTrabajadas
+ADD COLUMN horas_totales INT;
+
+select * from HorasTrabajadas;
+
+
 create table Salida(
       id_salida  int  primary key,
       tipo_salida VARCHAR(15)
@@ -85,11 +98,12 @@ create table Contrato(
       id_contrato  int  primary key,
       Tipo_contrato VARCHAR(25),
       fecha_inicio date,
-      fecha_finalizacion date,
+      fecha_finalizacion VARCHAR(20),
       empleado INT,
       FOREIGN KEY (empleado) REFERENCES ProcesoPersona ( id_procesoPersona)
 );
-
+select * from Contrato;
+delete from Contrato;
 create table TerminacionContrato(
      id_terminacion  int  primary key,
      motivoTerminacion VARCHAR(50),
@@ -104,6 +118,7 @@ create table Evaluacion(
       convenio INT,
       FOREIGN KEY (convenio) REFERENCES Contrato ( id_contrato)
 );
+select * from Evaluacion;
 
 
 create table Nomina(
@@ -124,3 +139,4 @@ create table Descuentos(
       FOREIGN KEY (nomina) REFERENCES Nomina ( id_nomina),
       FOREIGN KEY (descuentos) REFERENCES DescuentoLey ( id_descuento)
 );
+Select * from Descuentos;

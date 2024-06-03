@@ -376,7 +376,6 @@ public class Administradors extends javax.swing.JPanel {
     private void btn_lends2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lends2ActionPerformed
        AdminHoras p2 = new AdminHoras();
         MostrarPaneles(p2);
-        JOptionPane.showMessageDialog(null,"LA HORA SE MANEJA EN FORMATO 24 HORAS");
     }//GEN-LAST:event_btn_lends2ActionPerformed
 
     private void btn_lends3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lends3ActionPerformed

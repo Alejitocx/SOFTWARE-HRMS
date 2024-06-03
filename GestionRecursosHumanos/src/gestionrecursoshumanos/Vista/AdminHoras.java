@@ -4,9 +4,19 @@
  */
 package gestionrecursoshumanos.Vista;
 
+import gestionrecursoshumanos.Modelo.Contrato;
+import gestionrecursoshumanos.Modelo.ContratoDao;
+import gestionrecursoshumanos.Modelo.Evaluacion;
+import gestionrecursoshumanos.Modelo.EvaluacionDao;
 import gestionrecursoshumanos.Modelo.HorasTrabajadas;
 import gestionrecursoshumanos.Modelo.HorasTrabajadasDAO;
+import gestionrecursoshumanos.Vista.AdminSalida.NonEditableTableModel;
+import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -35,12 +45,14 @@ public class AdminHoras extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        TxtIdHora = new javax.swing.JTextField();
+        TxtCONT = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        TxtHF = new javax.swing.JTextField();
-        TxtHI = new javax.swing.JTextField();
+        TxtHoras = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setMaximumSize(new java.awt.Dimension(1097, 817));
@@ -60,42 +72,66 @@ public class AdminHoras extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("HORAS LABORADAS");
+        jLabel7.setText("INSPECCION DE HORAS LABORADAS");
 
-        jLabel2.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("INGRESE HORA DE SALIDA:");
-        jLabel2.setToolTipText("");
-
-        TxtIdHora.setBackground(new java.awt.Color(255, 255, 255));
-        TxtIdHora.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
-        TxtIdHora.setForeground(new java.awt.Color(0, 0, 0));
-        TxtIdHora.addActionListener(new java.awt.event.ActionListener() {
+        TxtCONT.setBackground(new java.awt.Color(255, 255, 255));
+        TxtCONT.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        TxtCONT.setForeground(new java.awt.Color(0, 0, 0));
+        TxtCONT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtIdHoraActionPerformed(evt);
+                TxtCONTActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("INGRESE LA IDENTIFICACION DEL EMPLEADO :");
+        jLabel4.setText("INGRESE EL NUMERO DE CONTRATO:");
         jLabel4.setToolTipText("");
 
         jLabel5.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("INGRESE HORA DE ENTRADA:");
+        jLabel5.setText("INGRESE HORAS TOTALES DE TRABAJO DIARIO:");
         jLabel5.setToolTipText("");
 
-        TxtHF.setBackground(new java.awt.Color(255, 255, 255));
-        TxtHF.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
-        TxtHF.setForeground(new java.awt.Color(0, 0, 0));
-
-        TxtHI.setBackground(new java.awt.Color(255, 255, 255));
-        TxtHI.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
-        TxtHI.setForeground(new java.awt.Color(0, 0, 0));
-        TxtHI.addActionListener(new java.awt.event.ActionListener() {
+        TxtHoras.setBackground(new java.awt.Color(255, 255, 255));
+        TxtHoras.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        TxtHoras.setForeground(new java.awt.Color(0, 0, 0));
+        TxtHoras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtHIActionPerformed(evt);
+                TxtHorasActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID DE LA HORA", "CONTRATO", "HORAS DIARIAS"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 1, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("INSERCION DE HORAS LABORADAS");
+
+        jButton2.setText("LLENAR TABLA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -103,55 +139,69 @@ public class AdminHoras extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(1050, 1050, 1050))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(91, 91, 91)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(355, 355, 355)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(265, 265, 265)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TxtHF, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TxtIdHora, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TxtHI, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(40, 40, 40)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TxtHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtCONT, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(205, 205, 205)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(186, 186, 186)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jButton2)
+                .addGap(95, 95, 95)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtIdHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtHI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtHF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(92, 92, 92)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TxtCONT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(62, 62, 62)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton2)))
+                .addGap(347, 347, 347)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -160,7 +210,7 @@ public class AdminHoras extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,88 +222,107 @@ public class AdminHoras extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-try {
-    // Validar y parsear ID
-    int id;
-    try {
-        id = Integer.parseInt(TxtIdHora.getText());
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "El ID debe ser un número entero.");
-        return;
-    }
-
-    // Validar y parsear hora de inicio
-    int horaInicio;
-    try {
-        String horaInicioStr = TxtHI.getText();
-        if (!horaInicioStr.matches("\\d{1,2}")) {
-            throw new IllegalArgumentException("La hora de inicio debe tener uno o dos dígitos NUMERICOS.");
-        }
-        horaInicio = Integer.parseInt(horaInicioStr);
-        if (horaInicio < 0 || horaInicio > 23) {
-            throw new NumberFormatException();
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "La hora de inicio debe ser un número válido entre 0 y 23.");
-        return;
-    } catch (IllegalArgumentException e) {
-        JOptionPane.showMessageDialog(null, e.getMessage());
-        return;
-    }
-
-    // Validar y parsear hora de salida
-    int horaSalida;
-    try {
-        String horaSalidaStr = TxtHF.getText();
-        if (!horaSalidaStr.matches("\\d{1,2}")) {
-            throw new IllegalArgumentException("La hora de salida debe tener uno o dos dígitos NUMERICOS.");
-        }
-        horaSalida = Integer.parseInt(horaSalidaStr);
-        if (horaSalida < 0 || horaSalida > 23) {
-            throw new NumberFormatException();
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "La hora de salida debe ser un número válido entre 0 y 23.");
-        return;
-    } catch (IllegalArgumentException e) {
-        JOptionPane.showMessageDialog(null, e.getMessage());
-        return;
-    }
-
-    // Crear instancia de HorasTrabajadas con horas como enteros
-    HorasTrabajadas horasTrabajadas = new HorasTrabajadas(id, horaInicio, horaSalida);
-
-    // Insertar las horas trabajadas en la base de datos
-    HorasTrabajadasDAO horasTrabajadasDAO = new HorasTrabajadasDAO();
-    horasTrabajadasDAO.insert(horasTrabajadas);
-
-    // Mostrar mensaje de éxito
-    JOptionPane.showMessageDialog(null, "Horas trabajadas insertadas exitosamente.");
-} catch (Exception e) {
-    JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
+// Obtener el ID del contrato ingresado por el usuario en el JTextField
+String idContratoStr = TxtCONT.getText().trim();
+if (idContratoStr.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID para el contrato.");
+    return;
 }
+int idContrato;
+try {
+    idContrato = Integer.parseInt(idContratoStr);
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID del contrato.");
+    return;
+}
+
+// Verificar si el contrato existe en la base de datos
+ContratoDao contratoDao = new ContratoDao();
+Contrato contrato = contratoDao.buscarConvenioPorId(idContrato);
+if (contrato == null) {
+    JOptionPane.showMessageDialog(null, "El contrato no fue encontrado en la base de datos.");
+    return;
+}
+
+// Obtener el número de horas ingresado por el usuario
+String horasStr = TxtHoras.getText().trim();
+if (horasStr.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese el número de horas trabajadas.");
+    return;
+}
+int horas;
+try {
+    horas = Integer.parseInt(horasStr);
+    if (horas <= 0 || horas > 12) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido de horas (entre 1 y 12).");
+        return;
+    }
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para las horas trabajadas.");
+    return;
+}
+
+// Generar un valor aleatorio para id_horasTrabajadas
+Random rand = new Random();
+int idHorasTrabajadas = rand.nextInt(Integer.MAX_VALUE);
+
+// Crear objeto HorasTrabajadas y realizar la inserción en la base de datos
+HorasTrabajadas horasTrabajadas = new HorasTrabajadas(idHorasTrabajadas,contrato,horas);
+HorasTrabajadasDAO horasTrabajadasDao = new HorasTrabajadasDAO();
+horasTrabajadasDao.insert(horasTrabajadas);
+JOptionPane.showMessageDialog(null, "HORAS AGREGADAS CORRECTAMENTE");
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void TxtIdHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdHoraActionPerformed
+    private void TxtCONTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCONTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtIdHoraActionPerformed
+    }//GEN-LAST:event_TxtCONTActionPerformed
 
-    private void TxtHIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtHIActionPerformed
+    private void TxtHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtHorasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtHIActionPerformed
+    }//GEN-LAST:event_TxtHorasActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+   // Obtener todas las horas trabajadas
+List<HorasTrabajadas> horasTrabajadasList = new HorasTrabajadasDAO().getAll();
+
+// Verificar si hay horas trabajadas
+if (horasTrabajadasList.isEmpty()) {
+    JOptionPane.showMessageDialog(null, "No se encontraron horas trabajadas.");
+} else {
+    // Convertir la lista de horas trabajadas a un formato adecuado para JTable
+    String[] columnNames = {"ID Horas Trabajadas", "Horas Totales", "ID Contrato"};
+    Object[][] data = new Object[horasTrabajadasList.size()][3];
+    for (int i = 0; i < horasTrabajadasList.size(); i++) {
+        HorasTrabajadas horasTrabajadas = horasTrabajadasList.get(i);
+        data[i][0] = horasTrabajadas.getIdHorasTrabajadas();
+        data[i][1] = horasTrabajadas.getHorasTotales();
+        data[i][2] = horasTrabajadas.getContrato().getIdContrato();
+    }
+    // Crear el modelo de la tabla no editable y actualizar el JTable
+    DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // Hacer que todas las celdas sean no editables
+        }
+    };
+    jTable1.setModel(model);
+}
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtHF;
-    private javax.swing.JTextField TxtHI;
-    private javax.swing.JTextField TxtIdHora;
+    private javax.swing.JTextField TxtCONT;
+    private javax.swing.JTextField TxtHoras;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
