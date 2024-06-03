@@ -72,27 +72,27 @@ public class EvaluacionDao {
     return evaluacion;
 }
       private Contrato buscarContratoPorId(int id) {
-        Contrato contrato = null;
-        String sql = "SELECT * FROM Contrato WHERE idContrato = ?";
-        try (Connection con = Conexion.ConnectionAS()) {
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                int idContrato = rs.getInt("idContrato");
-                String tipoContrato = rs.getString("tipoContrato");
-                LocalDate fechaInicio = rs.getDate("fechaInicio").toLocalDate();
-                LocalDate fechaFinalizacion = rs.getDate("fechaFinalizacion").toLocalDate();
-                int empleadoId = rs.getInt("empleado_id");
+    Contrato contrato = null;
+    String sql = "SELECT * FROM Contrato WHERE id_contrato = ?";
+    try (Connection con = Conexion.ConnectionAS()) {
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            int idContrato = rs.getInt("id_contrato");
+            String tipoContrato = rs.getString("tipo_contrato");
+            LocalDate fechaInicio = rs.getDate("fecha_inicio").toLocalDate();
+            String fechaFinalizacion = rs.getString("fecha_finalizacion"); // Cambiado a String directamente
+            int empleadoId = rs.getInt("empleado_id");
 
-                ProcesoPersona empleado = buscarProcesoPersonaPorId(empleadoId);
-                contrato = new Contrato(idContrato, tipoContrato, fechaInicio, fechaFinalizacion, empleado);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            ProcesoPersona empleado = buscarProcesoPersonaPorId(empleadoId);
+            contrato = new Contrato(idContrato, tipoContrato, fechaInicio, fechaFinalizacion, empleado);
         }
-        return contrato;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return contrato;
+}
        private ProcesoPersona buscarProcesoPersonaPorId(int id) {
         ProcesoPersona procesoPersona = null;
         String sql = "SELECT * FROM ProcesoPersona WHERE idProcesoPersona = ?";

@@ -78,7 +78,7 @@ public class TerminacionContraroDao {
         }
     }
 
-   private Contrato buscarContratoPorId(int id) {
+private Contrato buscarContratoPorId(int id) {
     Contrato contrato = null;
     String sql = "SELECT * FROM Contrato WHERE idContrato = ?";
     try (Connection con = Conexion.ConnectionAS()) {
@@ -88,7 +88,8 @@ public class TerminacionContraroDao {
         if (rs.next()) {
             String tipoContrato = rs.getString("tipoContrato");
             LocalDate fechaInicio = rs.getDate("fechaInicio").toLocalDate();
-            LocalDate fechaFinalizacion = rs.getDate("fechaFinalizacion").toLocalDate();
+            // Convertir la fechaFinalizacion de String a LocalDate
+            String fechaFinalizacion = rs.getString("fechaFinalizacion"); 
             // Suponiendo que hay un método para buscar ProcesoPersona por ID
             ProcesoPersona empleado = buscarProcesoPersonaPorId(rs.getInt("empleado_id"));
             contrato = new Contrato(id, tipoContrato, fechaInicio, fechaFinalizacion, empleado);
@@ -98,6 +99,8 @@ public class TerminacionContraroDao {
     }
     return contrato;
 }
+
+   
 private ProcesoPersona buscarProcesoPersonaPorId(int id) {
     ProcesoPersona procesoPersona = null;
     String sql = "SELECT * FROM ProcesoPersona WHERE idProcesoPersona = ?";

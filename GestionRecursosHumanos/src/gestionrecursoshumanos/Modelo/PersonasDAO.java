@@ -143,4 +143,16 @@ public List<Personas> findAll() {
         return listaPersonas;
     }
 
+public static  void actualizarCategoriaPersona(int idPersona, int nuevaCategoria) {
+    String sql = "UPDATE Personas SET categoria = ? WHERE id_persona = ?";
+    try (Connection con = Conexion.ConnectionAS()) {
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, nuevaCategoria);
+        pst.setInt(2, idPersona);
+        pst.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
 }

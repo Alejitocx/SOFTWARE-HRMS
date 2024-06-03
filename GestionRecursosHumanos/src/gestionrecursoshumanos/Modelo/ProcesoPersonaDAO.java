@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author alejo
@@ -17,17 +20,19 @@ import java.sql.*;
 public class ProcesoPersonaDAO {
     Conexion con = new Conexion();
      // Método para insertar un nuevo ProcesoPersona en la base de datos
-    public static void insertarProcesoPersona(ProcesoPersona procesoPersona) {
-     String sql = "INSERT INTO ProcesoPersona (id_procesoPersona, candidato, seleccion) VALUES (?,?,?)";
-    try (Connection con = Conexion.ConnectionAS()) {
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setInt(1, procesoPersona.getIdProcesoPersona());
-        pst.setInt(2, procesoPersona.getCandidato().getId_persona());
-        pst.setInt(3, procesoPersona.getSeleccion().getIdProceso());
-        pst.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
+    public boolean insert(ProcesoPersona procesoPersona) {
+        String sql = "INSERT INTO ProcesoPersona (id_procesoPersona, candidato, seleccion) VALUES (?, ?, ?)";
+        try (Connection con = Conexion.ConnectionAS()) {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, procesoPersona.getIdProcesoPersona());
+            pst.setInt(2, procesoPersona.getCandidato().getId_persona());
+            pst.setInt(3, procesoPersona.getSeleccion().getIdProceso());
+            pst.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // Método para actualizar un ProcesoPersona existente en la base de datos
@@ -89,4 +94,26 @@ public class ProcesoPersonaDAO {
         return procesoSeleccionDAO.buscarProcesoSeleccionPorId(id);
     }   
  
+     public List<ProcesoPersona> findAll() {
+       List<ProcesoPersona> listaProcesoPersonas = new ArrayList<>();
+    String sql = "SELECT * FROM ProcesoPersona";
+    try (Connection con = Conexion.ConnectionAS()) {
+        PreparedStatement pst = con.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            int idProcesoPersona = rs.getInt("id_procesoPersona");
+            int candidatoId = rs.getInt("candidato");
+            int seleccionId = rs.getInt("seleccion");
+            Personas candidato = new PersonasDAO().findById(candidatoId);
+            ProcesoSeleccion seleccion = new ProcesoSeleccionDAO().buscarProcesoSeleccionPorId(seleccionId);
+
+            ProcesoPersona procesoPersona = new ProcesoPersona(idProcesoPersona, candidato, seleccion);
+            listaProcesoPersonas.add(procesoPersona);
+        }
+        System.out.println("Total de ProcesoPersona encontrados: " + listaProcesoPersonas.size());
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return listaProcesoPersonas;
+}
 }

@@ -5,11 +5,13 @@
 package gestionrecursoshumanos.Modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 
 @Entity
 public class Cargo {
     
+    @Id
     private int idCargo;
     private String cargosDisponibles;
     private float salario;

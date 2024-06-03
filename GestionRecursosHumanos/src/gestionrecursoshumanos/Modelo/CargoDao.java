@@ -76,5 +76,24 @@ public class CargoDao {
             e.printStackTrace();
         }
     }
+     // Método para encontrar un Cargo por su ID
+     // Método para encontrar un Cargo por su ID
+    public Cargo findById(int idCargo) {
+        String sql = "SELECT * FROM Cargo WHERE id_cargo = ?";
+        try (Connection con = Conexion.ConnectionAS()) {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, idCargo);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id_cargo");
+                String cargosDisponibles = rs.getString("cargos_disponibles");
+                float salario = rs.getFloat("salario");
+                return new Cargo(id, cargosDisponibles, salario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

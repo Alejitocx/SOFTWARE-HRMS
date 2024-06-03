@@ -4,6 +4,18 @@
  */
 package gestionrecursoshumanos.Vista;
 
+import gestionrecursoshumanos.Modelo.Contrato;
+import gestionrecursoshumanos.Modelo.ContratoDao;
+import gestionrecursoshumanos.Modelo.Personas;
+import gestionrecursoshumanos.Modelo.PersonasDAO;
+import gestionrecursoshumanos.Modelo.ProcesoPersona;
+import gestionrecursoshumanos.Modelo.ProcesoPersonaDAO;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author alejo
@@ -29,18 +41,20 @@ public class AdminCont extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        JtextId = new javax.swing.JTextField();
+        TxtFEI = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        TxtIdper = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
+        Jfecha = new javax.swing.JComboBox<>();
+        Botonllenar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        TxtCont = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        TxtFEF = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setMaximumSize(new java.awt.Dimension(1097, 817));
@@ -50,40 +64,31 @@ public class AdminCont extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("IDENTIFICACION DEL CARGO");
+        jLabel2.setText("FECHA DE FINALIZACION");
         jLabel2.setToolTipText("");
 
-        JtextId.setBackground(new java.awt.Color(255, 255, 255));
-        JtextId.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
-        JtextId.setForeground(new java.awt.Color(0, 0, 0));
-        JtextId.addActionListener(new java.awt.event.ActionListener() {
+        TxtFEI.setBackground(new java.awt.Color(255, 255, 255));
+        TxtFEI.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
+        TxtFEI.setForeground(new java.awt.Color(0, 0, 0));
+        TxtFEI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JtextIdActionPerformed(evt);
+                TxtFEIActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("ID PROCESO ASPIRANTE");
+        jLabel4.setText("NUMERO DE CONTRATO");
         jLabel4.setToolTipText("");
-
-        TxtIdper.setBackground(new java.awt.Color(255, 255, 255));
-        TxtIdper.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
-        TxtIdper.setForeground(new java.awt.Color(0, 0, 0));
-        TxtIdper.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtIdperActionPerformed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("IDENTIFICACION DEL ASPIRANTE ");
+        jLabel5.setText("TIPO DE CONTRATO");
         jLabel5.setToolTipText("");
 
         jButton1.setBackground(new java.awt.Color(0, 102, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("ACEPTAR");
+        jButton1.setText("CONTRATAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -111,28 +116,24 @@ public class AdminCont extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setBackground(new java.awt.Color(204, 0, 0));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("RECHAZAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 1, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("CONTRATACION");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
-
-        jButton4.setBackground(new java.awt.Color(0, 102, 102));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("LLENAR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        Jfecha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DEFINIDO", "INDEFINIDO" }));
+        Jfecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                JfechaActionPerformed(evt);
+            }
+        });
+
+        Botonllenar.setBackground(new java.awt.Color(0, 102, 102));
+        Botonllenar.setForeground(new java.awt.Color(255, 255, 255));
+        Botonllenar.setText("LLENAR");
+        Botonllenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonllenarActionPerformed(evt);
             }
         });
 
@@ -144,46 +145,91 @@ public class AdminCont extends javax.swing.JPanel {
             }
         });
 
+        TxtCont.setBackground(new java.awt.Color(255, 255, 255));
+        TxtCont.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
+        TxtCont.setForeground(new java.awt.Color(0, 0, 0));
+        TxtCont.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtContActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(204, 0, 0));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("RECHAZAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("FECHA DE INICIO");
+        jLabel6.setToolTipText("");
+
+        TxtFEF.setBackground(new java.awt.Color(255, 255, 255));
+        TxtFEF.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
+        TxtFEF.setForeground(new java.awt.Color(0, 0, 0));
+        TxtFEF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtFEFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(TxtCont, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton5)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtFEF, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel5)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Jfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(TxtFEI, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(Botonllenar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(616, 616, 616)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(1050, 1050, 1050))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JtextId, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(TxtIdper, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addGap(58, 58, 58)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(101, 101, 101))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(373, 373, 373)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(142, 142, 142)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(446, 446, 446)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -201,25 +247,29 @@ public class AdminCont extends javax.swing.JPanel {
                         .addGap(65, 65, 65))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Botonllenar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(125, 125, 125)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JtextId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtIdper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5))
-                        .addGap(62, 62, 62)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(111, 111, 111))
+                            .addComponent(jButton5)
+                            .addComponent(Jfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtCont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtFEI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TxtFEF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,193 +291,183 @@ public class AdminCont extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JtextIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JtextIdActionPerformed
+    private void TxtFEIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFEIActionPerformed
 
-        JOptionPane.showMessageDialog(null, "EL ID DEL PROCESO DEBE SER IGUAL A LA IDENTIFICACION DE LA PERSONA.");
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JtextIdActionPerformed
-
-    private void TxtIdperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdperActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtIdperActionPerformed
+    
+    }//GEN-LAST:event_TxtFEIActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Obtener el ID de proceso persona ingresado por el usuario
-        String numeroProcesoStr = JtextId.getText();
-        int numeroProceso = 0;
-        if (!numeroProcesoStr.isEmpty()) {
-            try {
-                numeroProceso = Integer.parseInt(numeroProcesoStr.trim());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el número de proceso.");
-                return; // Sal de este método si el input no es un número
-            }
-        }
+  try {
+    // Obtener el ID de contrato ingresado por el usuario
+    String idContratoStr = TxtCont.getText().trim();
+    if (idContratoStr.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese un número para el ID del contrato.");
+        return;
+    }
+    int idContrato;
+    try {
+        idContrato = Integer.parseInt(idContratoStr);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID del contrato.");
+        return;
+    }
+    System.out.println("ID del contrato: " + idContrato);
 
-        // Verificar si el ID de proceso persona ya existe en la base de datos
-        ProcesoPersona existente = new ProcesoPersonaDAO().buscarProcesoPersonaPorId(numeroProceso);
-        if (existente != null) {
-            JOptionPane.showMessageDialog(null, "El ID del proceso ya existe. Por favor, ingrese un ID único.", "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Sal de este método si el ID ya existe
-        }
+    // Obtener el tipo de contrato seleccionado por el usuario del JComboBox
+    String tipoContrato = Jfecha.getSelectedItem().toString();
+    System.out.println("Tipo de contrato seleccionado: " + tipoContrato);
 
-        // Obtener el ID de persona ingresado por el usuario
-        String idPersonaStr = TxtIdper.getText();
-        int idPersona = 0;
-        if (!idPersonaStr.isEmpty()) {
-            try {
-                idPersona = Integer.parseInt(idPersonaStr.trim());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID de la persona.");
-                return; // Sal de este método si el input no es un número
-            }
-        }
+    // Obtener la fecha de inicio ingresada por el usuario
+    String fechaInicioStr = TxtFEI.getText().trim();
+    if (fechaInicioStr.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese la fecha de inicio del contrato.");
+        return;
+    }
+    LocalDate fechaInicio = LocalDate.parse(fechaInicioStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    System.out.println("Fecha de inicio del contrato: " + fechaInicio);
 
-        // Verifica si el ID de la persona existe en la base de datos
-        Personas personaEncontrada = new PersonasDAO().findById(idPersona);
-        if (personaEncontrada == null) {
-            // Indicar al usuario que la persona no fue encontrada
-            JOptionPane.showMessageDialog(null, "La persona no fue encontrada en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+    String fechaFinalizacion;
+if (Jfecha.getSelectedItem().toString().equals("INDEFINIDO")) {
+    fechaFinalizacion = "INDEFINIDOA";
+} else {
+    // Obtener la fecha de finalización ingresada por el usuario
+    String fechaFinalizacionStr = TxtFEF.getText().trim();
+    if (fechaFinalizacionStr.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese la fecha de finalización del contrato.");
+        return;
+    }
+    // Convertir la fecha de finalización al formato requerido en la base de datos
+    LocalDate fechaFinalizacionDate = LocalDate.parse(fechaFinalizacionStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    fechaFinalizacion = fechaFinalizacionDate.toString(); // o puedes formatearla a tu formato preferido
+    System.out.println("Fecha de finalización del contrato: " + fechaFinalizacion);
+}
 
-        // Obtener la selección del JComboBox
-        String seleccionStr = jComboBox1.getSelectedItem().toString();
-        int seleccionId = 0;
-        try {
-            seleccionId = Integer.parseInt(seleccionStr.trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "La selección debe ser un número válido.");
-            return; // Sal de este método si la selección no es un número
-        }
+    // Obtener el ID del empleado ingresado por el usuario
+    String idEmpleadoStr = TxtCont.getText().trim(); // Asumiendo que se ingresa el ID del empleado en el mismo campo que el ID del contrato
+    if (idEmpleadoStr.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese un número para el ID del empleado.");
+        return;
+    }
+    int idEmpleado;
+    try {
+        idEmpleado = Integer.parseInt(idEmpleadoStr);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID del empleado.");
+        return;
+    }
+    System.out.println("ID del empleado: " + idEmpleado);
 
-        // Verifica si el ID del proceso de selección existe en la base de datos
-        ProcesoSeleccion seleccionObj = new ProcesoSeleccionDAO().buscarProcesoSeleccionPorId(seleccionId);
-        if (seleccionObj == null) {
-            JOptionPane.showMessageDialog(null, "El proceso de selección no fue encontrado en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+    // Verificar si el empleado existe en la base de datos
+    ProcesoPersona empleado = new ProcesoPersonaDAO().buscarProcesoPersonaPorId(idEmpleado);
+    if (empleado == null) {
+        JOptionPane.showMessageDialog(null, "El empleado no fue encontrado en la base de datos.");
+        return;
+    }
 
-        // Crear un nuevo objeto ProcesoPersona con los datos obtenidos
-        ProcesoPersona procesoPersona = new ProcesoPersona();
-        procesoPersona.setIdProcesoPersona(numeroProceso);
-        procesoPersona.setCandidato(personaEncontrada);
-        procesoPersona.setSeleccion(seleccionObj);
+    // Crear el objeto Contrato con los datos obtenidos
+    Contrato contrato = new Contrato();
+    contrato.setIdContrato(idContrato);
+    contrato.setTipoContrato(tipoContrato);
+    contrato.setFechaInicio(fechaInicio);
+    contrato.setFechaFinalizacion(fechaFinalizacion);
+    contrato.setEmpleado(empleado);
 
-        // Insertar el proceso persona en la base de datos
-        new ProcesoPersonaDAO().insertarProcesoPersona(procesoPersona);
+    // Insertar el contrato en la base de datos
+    new ContratoDao().insert(contrato);
 
-        // Mostrar mensaje de éxito
-        JOptionPane.showMessageDialog(null, "Registro insertado exitosamente.");
+    // Mostrar mensaje de éxito
+    JOptionPane.showMessageDialog(null, "Contrato insertado correctamente.");
+} catch (Exception e) {
+    e.printStackTrace();
+    JOptionPane.showMessageDialog(null, "Error al insertar el contrato: " + e.getMessage());
+}
+  
+  // Obtener el ID del empleado ingresado por el usuario
+String idEmpleadoStr = TxtCont.getText().trim();
+int idEmpleado;
+try {
+    idEmpleado = Integer.parseInt(idEmpleadoStr);
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID del empleado.");
+    return;
+}
 
+// Verificar si el empleado existe en la base de datos
+ProcesoPersona empleado = new ProcesoPersonaDAO().buscarProcesoPersonaPorId(idEmpleado);
+if (empleado == null) {
+    JOptionPane.showMessageDialog(null, "El empleado no fue encontrado en la base de datos.");
+    return;
+}
+
+// Llamada al método de actualización de la categoría
+ PersonasDAO.actualizarCategoriaPersona(idEmpleado, 2); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String idPersonaStr = TxtIdper.getText().trim();
+    private void BotonllenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonllenarActionPerformed
+      try {
+        // Crear instancia de ProcesoPersonaDAO
+        ProcesoPersonaDAO procesoPersonaDAO = new ProcesoPersonaDAO();
+        // Obtener la lista de todos los procesos de persona
+        List<ProcesoPersona> listaProcesoPersona = procesoPersonaDAO.findAll();
 
-        if (!idPersonaStr.isEmpty()) {
-            try {
-                int idPersona = Integer.parseInt(idPersonaStr);
+        System.out.println("Total de ProcesoPersona en la lista: " + listaProcesoPersona.size());
 
-                // Crear instancia de PersonasDAO
-                PersonasDAO personasDAO = new PersonasDAO();
-                Personas persona = personasDAO.findById(idPersona);
+        // Obtener el modelo de la tabla
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        // Limpiar tabla existente
+        model.setRowCount(0);
 
-                // Verificar si la persona existe
-                if (persona == null) {
-                    JOptionPane.showMessageDialog(null, "El ID de persona no existe en la base de datos.");
-                    return;
-                }
-
-                // Confirmación de eliminación
-                int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas eliminar esta persona?", "Confirmación", JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION) {
-                    // Eliminar la persona
-                    personasDAO.eliminarPersona(idPersona);
-
-                    // Actualizar la tabla
-                    actualizarTablaPersonas(personasDAO);
-
-                    JOptionPane.showMessageDialog(null, "Persona eliminada exitosamente.");
-                }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID de la persona.");
-            } catch (SQLException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error al eliminar la persona: " + e.getMessage());
-            } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese el ID de la persona.");
+        // Recorrer la lista de ProcesoPersonas y agregar cada procesoPersona como una fila en la tabla
+        for (ProcesoPersona procesoPersona : listaProcesoPersona) {
+            System.out.println("Agregando ProcesoPersona con ID: " + procesoPersona.getIdProcesoPersona());
+            model.addRow(new Object[]{
+                procesoPersona.getIdProcesoPersona(),
+                procesoPersona.getCandidato().getNombre_Completo(),
+                procesoPersona.getSeleccion().getIdProceso()
+            });
         }
-        }
-
-        // Método para actualizar la tabla de personas
-        private void actualizarTablaPersonas(PersonasDAO personasDAO) {
-            List<Personas> lista = personasDAO.findAll();
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.setRowCount(0);
-            for (Personas persona : lista) {
-                model.addRow(new Object[]{
-                    persona.getId_persona(),
-                    persona.getNombre_Completo(),
-                    persona.getTelefono(),
-                    persona.getProfesion(),
-                    persona.getDireccion(),
-                    persona.getEmail(),
-                });
-            }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try {
-            // Crear instancia de PersonasDAO
-            PersonasDAO personasDAO = new PersonasDAO();
-            // Obtener la lista de todas las personas
-            List<Personas> lista = personasDAO.findAll(); // Usamos findAll()
-
-            // Obtener el modelo de la tabla
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            // Limpiar tabla existente
-            model.setRowCount(0);
-
-            // Recorrer la lista de personas y agregar cada persona como una fila en la tabla
-            for (Personas persona : lista) {
-                model.addRow(new Object[]{
-                    persona.getId_persona(),
-                    persona.getNombre_Completo(),
-                    persona.getTelefono(),
-                    persona.getProfesion(),
-                    persona.getDireccion(),
-                    persona.getEmail(),
-
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al cargar datos: " + e.getMessage());
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al cargar datos: " + e.getMessage());
+    }
+      
+    }//GEN-LAST:event_BotonllenarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+       JOptionPane.showMessageDialog(null, "EL NUMERO DE CONTRATO SEA IGUAL AL DEL PROCESO DE PERSONA PARA UN MEJOR MANEJO DE LOS DATOS");
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void TxtContActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtContActionPerformed
+        
+    }//GEN-LAST:event_TxtContActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void TxtFEFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFEFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtFEFActionPerformed
+
+    private void JfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JfechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JfechaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField JtextId;
-    private javax.swing.JTextField TxtIdper;
+    private javax.swing.JButton Botonllenar;
+    private javax.swing.JComboBox<String> Jfecha;
+    private javax.swing.JTextField TxtCont;
+    private javax.swing.JTextField TxtFEF;
+    private javax.swing.JTextField TxtFEI;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

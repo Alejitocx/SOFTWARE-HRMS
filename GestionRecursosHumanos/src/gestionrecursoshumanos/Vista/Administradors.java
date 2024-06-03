@@ -389,7 +389,7 @@ public class Administradors extends javax.swing.JPanel {
         MostrarPaneles(P3);    }//GEN-LAST:event_btn_lends4ActionPerformed
 
     private void btn_lends5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lends5ActionPerformed
-        AdminCali P4 = new AdminCali();
+        AdminCont P4 = new AdminCont();
         MostrarPaneles(P4); 
     }//GEN-LAST:event_btn_lends5ActionPerformed
 
@@ -409,7 +409,8 @@ public class Administradors extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_lends7ActionPerformed
 
     private void btn_lends9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lends9ActionPerformed
-        // TODO add your handling code here:
+       AdminCali p8 = new AdminCali();
+       MostrarPaneles(p8);
     }//GEN-LAST:event_btn_lends9ActionPerformed
 
 

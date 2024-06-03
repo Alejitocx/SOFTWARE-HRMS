@@ -15,7 +15,7 @@ public class Contrato {
     private int idContrato;
     private String tipoContrato;
     private LocalDate fechaInicio;
-    private LocalDate fechaFinalizacion;
+    private String fechaFinalizacion; // Cambiado a String
 
     @ManyToOne
     private ProcesoPersona empleado;
@@ -24,8 +24,9 @@ public class Contrato {
     public Contrato() {
     }
 
+    
     // Constructor con parámetros
-    public Contrato(int idContrato, String tipoContrato, LocalDate fechaInicio, LocalDate fechaFinalizacion, ProcesoPersona empleado) {
+    public Contrato(int idContrato, String tipoContrato, LocalDate fechaInicio, String fechaFinalizacion, ProcesoPersona empleado) {
         this.idContrato = idContrato;
         this.tipoContrato = tipoContrato;
         this.fechaInicio = fechaInicio;
@@ -58,11 +59,11 @@ public class Contrato {
         this.fechaInicio = fechaInicio;
     }
 
-    public LocalDate getFechaFinalizacion() {
+    public String getFechaFinalizacion() {
         return fechaFinalizacion;
     }
 
-    public void setFechaFinalizacion(LocalDate fechaFinalizacion) {
+    public void setFechaFinalizacion(String fechaFinalizacion) {
         this.fechaFinalizacion = fechaFinalizacion;
     }
 
@@ -74,4 +75,5 @@ public class Contrato {
         this.empleado = empleado;
     }
 }
+
 

@@ -21,8 +21,8 @@ public class Logins extends javax.swing.JPanel {
         initComponents();
     }
     
-private final String adminEmail = "admin";
-private final String adminPass = "admin123";
+private final String adminEmail = "1";
+private final String adminPass = "1";
 
 private final String userEmail = "user";
 private final String userPass = "user123";

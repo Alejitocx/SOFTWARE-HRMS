@@ -30,6 +30,7 @@ public class AdminSelec extends javax.swing.JPanel {
     public AdminSelec() {
         initComponents();
     }
+    
    
 
     /**
@@ -54,9 +55,9 @@ public class AdminSelec extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        TxtCargo = new javax.swing.JTextField();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -144,8 +145,6 @@ public class AdminSelec extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("SELECCION DE ASPIRANTES");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
-
         jButton4.setBackground(new java.awt.Color(0, 102, 102));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("LLENAR");
@@ -162,6 +161,9 @@ public class AdminSelec extends javax.swing.JPanel {
                 jButton5ActionPerformed(evt);
             }
         });
+
+        TxtCargo.setBackground(new java.awt.Color(255, 255, 255));
+        TxtCargo.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -200,7 +202,7 @@ public class AdminSelec extends javax.swing.JPanel {
                         .addGap(58, 58, 58)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(101, 101, 101))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -229,15 +231,15 @@ public class AdminSelec extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JtextId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxtIdper, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5))
+                            .addComponent(jButton5)
+                            .addComponent(TxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(62, 62, 62)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(111, 111, 111))
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(46, 46, 46)
@@ -263,75 +265,85 @@ public class AdminSelec extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     // Obtener el ID de proceso persona ingresado por el usuario
-    String numeroProcesoStr = JtextId.getText();
-    int numeroProceso = 0;
-    if (!numeroProcesoStr.isEmpty()) {
-        try {
-            numeroProceso = Integer.parseInt(numeroProcesoStr.trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el número de proceso.");
-            return; // Sal de este método si el input no es un número
+  try {
+        // Obtener el ID de proceso persona ingresado por el usuario
+        String numeroProcesoStr = JtextId.getText().trim();
+        if (numeroProcesoStr.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número para el proceso persona.");
+            return;
         }
-    }
-
-    // Verificar si el ID de proceso persona ya existe en la base de datos
-    ProcesoPersona existente = new ProcesoPersonaDAO().buscarProcesoPersonaPorId(numeroProceso);
-    if (existente != null) {
-        JOptionPane.showMessageDialog(null, "El ID del proceso ya existe. Por favor, ingrese un ID único.", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Sal de este método si el ID ya existe
-    }
-
-    // Obtener el ID de persona ingresado por el usuario
-    String idPersonaStr = TxtIdper.getText();
-    int idPersona = 0;
-    if (!idPersonaStr.isEmpty()) {
+        int numeroProceso;
         try {
-            idPersona = Integer.parseInt(idPersonaStr.trim());
+            numeroProceso = Integer.parseInt(numeroProcesoStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el proceso persona.");
+            return;
+        }
+
+        // Verificar si el ID de proceso persona ya existe en la base de datos
+        ProcesoPersona existente = new ProcesoPersonaDAO().buscarProcesoPersonaPorId(numeroProceso);
+        if (existente != null) {
+            JOptionPane.showMessageDialog(null, "El ID del proceso persona ya existe. Por favor, ingrese un ID único.");
+            return;
+        }
+
+        // Obtener el ID de persona ingresado por el usuario
+        String idPersonaStr = TxtIdper.getText().trim();
+        if (idPersonaStr.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número para el ID de la persona.");
+            return;
+        }
+        int idPersona;
+        try {
+            idPersona = Integer.parseInt(idPersonaStr);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el ID de la persona.");
-            return; // Sal de este método si el input no es un número
+            return;
         }
+
+        // Verificar si el ID de la persona existe en la base de datos
+        Personas personaEncontrada = new PersonasDAO().findById(idPersona);
+        if (personaEncontrada == null) {
+            JOptionPane.showMessageDialog(null, "La persona no fue encontrada en la base de datos.");
+            return;
+        }
+
+        // Obtener el ID del proceso de selección ingresado por el usuario
+        String seleccionStr = TxtCargo.getText().trim();
+        if (seleccionStr.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID para el proceso de selección.");
+            return;
+        }
+        int seleccionId;
+        try {
+            seleccionId = Integer.parseInt(seleccionStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para el proceso de selección.");
+            return;
+        }
+
+        // Verificar si el ID del proceso de selección existe en la base de datos
+        ProcesoSeleccion seleccionObj = new ProcesoSeleccionDAO().buscarProcesoSeleccionPorId(seleccionId);
+        if (seleccionObj == null) {
+            JOptionPane.showMessageDialog(null, "El proceso de selección no fue encontrado en la base de datos.");
+            return;
+        }
+
+        // Crear el objeto ProcesoPersona con los datos obtenidos
+        ProcesoPersona procesoPersona = new ProcesoPersona();
+        procesoPersona.setIdProcesoPersona(numeroProceso);
+        procesoPersona.setCandidato(personaEncontrada);
+        procesoPersona.setSeleccion(seleccionObj); // Aquí usamos el objeto seleccionado de la base de datos
+
+        // Insertar el proceso persona en la base de datos
+        new ProcesoPersonaDAO().insert(procesoPersona);
+
+        // Mostrar mensaje de éxito
+        JOptionPane.showMessageDialog(null, "Registro insertado exitosamente.");
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al procesar la solicitud: " + e.getMessage());
     }
-
-    // Verifica si el ID de la persona existe en la base de datos
-    Personas personaEncontrada = new PersonasDAO().findById(idPersona);
-    if (personaEncontrada == null) {
-        // Indicar al usuario que la persona no fue encontrada
-        JOptionPane.showMessageDialog(null, "La persona no fue encontrada en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    // Obtener la selección del JComboBox
-    String seleccionStr = jComboBox1.getSelectedItem().toString();
-    int seleccionId = 0;
-    try {
-        seleccionId = Integer.parseInt(seleccionStr.trim());
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "La selección debe ser un número válido.");
-        return; // Sal de este método si la selección no es un número
-    }
-
-    // Verifica si el ID del proceso de selección existe en la base de datos
-    ProcesoSeleccion seleccionObj = new ProcesoSeleccionDAO().buscarProcesoSeleccionPorId(seleccionId);
-    if (seleccionObj == null) {
-        JOptionPane.showMessageDialog(null, "El proceso de selección no fue encontrado en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    // Crear un nuevo objeto ProcesoPersona con los datos obtenidos
-    ProcesoPersona procesoPersona = new ProcesoPersona();
-    procesoPersona.setIdProcesoPersona(numeroProceso);
-    procesoPersona.setCandidato(personaEncontrada);
-    procesoPersona.setSeleccion(seleccionObj);
-
-    // Insertar el proceso persona en la base de datos
-    new ProcesoPersonaDAO().insertarProcesoPersona(procesoPersona);
-
-    // Mostrar mensaje de éxito
-    JOptionPane.showMessageDialog(null, "Registro insertado exitosamente.");
-
-        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -435,18 +447,19 @@ private void actualizarTablaPersonas(PersonasDAO personasDAO) {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+       JOptionPane.showMessageDialog(null,"PARA GUARDAR EL EMPLEADO EL ID DE EL PROCESO DEBE SER IGUAL AL DEL ASPIRANTE");
+        JOptionPane.showMessageDialog(null,"PARA ELIMINAR EL ASPIRANTE SE DEBE INGRESAR SU ID");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JtextId;
+    private javax.swing.JTextField TxtCargo;
     private javax.swing.JTextField TxtIdper;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

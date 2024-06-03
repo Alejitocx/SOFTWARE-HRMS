@@ -88,6 +88,7 @@ public class ProcesoSeleccionDAO {
         return cargo;
     }
 
+    // Método para encontrar un ProcesoSeleccion por su ID
     public ProcesoSeleccion buscarProcesoSeleccionPorId(int id) {
         ProcesoSeleccion procesoSeleccion = null;
         String sql = "SELECT * FROM ProcesoSeleccion WHERE id_proceso = ?";
@@ -97,8 +98,14 @@ public class ProcesoSeleccionDAO {
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 int idProcesoSeleccion = rs.getInt("id_proceso");
+                int idCargo = rs.getInt("funcion"); // Asumiendo que hay una columna id_cargo en la tabla ProcesoSeleccion
+
+                // Obtener el objeto Cargo usando el idCargo
+                CargoDao cargoDAO = new CargoDao();
+                Cargo funcion = cargoDAO.findById(idCargo);
+
                 // Crear el objeto ProcesoSeleccion
-                procesoSeleccion = new ProcesoSeleccion(idProcesoSeleccion);
+                procesoSeleccion = new ProcesoSeleccion(idProcesoSeleccion, funcion);
             }
         } catch (SQLException e) {
             e.printStackTrace();
