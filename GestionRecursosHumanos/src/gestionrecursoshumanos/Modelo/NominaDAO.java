@@ -29,7 +29,7 @@ public class NominaDAO {
                 float pagoNomina = rs.getFloat("pagoNomina");
                 HorasTrabajadas horasTrabajo = new HorasTrabajadasDAO().findById(rs.getInt("horasTrabajo"));
                 Salida motivoSalida = new SalidaDAO().findById(rs.getInt("motivoSalida"));
-                Contrato convenio = new ContratoDao().find(rs.getInt("convenio"));
+                Contrato convenio = new ContratoDao().buscarConvenioPorId(rs.getInt("convenio"));
                 nomina = new Nomina(idNomina, pagoNomina, horasTrabajo, motivoSalida, convenio);
             }
         } catch (SQLException e) {

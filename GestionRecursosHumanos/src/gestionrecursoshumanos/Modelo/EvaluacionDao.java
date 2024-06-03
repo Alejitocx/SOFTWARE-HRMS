@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author alejo
@@ -16,7 +18,7 @@ import java.time.LocalDate;
 public class EvaluacionDao {
     Conexion con = new Conexion();
     public void insert(Evaluacion evaluacion) {
-        String sql = "INSERT INTO Evaluacion (idEvaluacion, calificacion, convenio_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Evaluacion (id_evaluacion, calificacion, convenio) VALUES (?, ?, ?)";
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, evaluacion.getIdEvaluacion());
@@ -61,7 +63,7 @@ public class EvaluacionDao {
         ResultSet rs = pst.executeQuery();
         if (rs.next()) {
             int idEvaluacion = rs.getInt("idEvaluacion");
-            int convenioId = rs.getInt("convenio_id");
+            int convenioId = rs.getInt("convenio");
 
             Contrato convenio = buscarContratoPorId(convenioId);
             evaluacion = new Evaluacion(idEvaluacion, calificacion, convenio);
@@ -113,6 +115,27 @@ public class EvaluacionDao {
         }
         return procesoPersona;
     }
-      
+     
+  public List<Evaluacion> buscarEvaluacionesPorConvenioId(int convenioId) {
+    List<Evaluacion> evaluaciones = new ArrayList<>();
+    String sql = "SELECT * FROM Evaluacion WHERE convenio = ?";
+    try (Connection con = Conexion.ConnectionAS()) {
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, convenioId);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            int idEvaluacion = rs.getInt("id_evaluacion");
+            String calificacion = rs.getString("calificacion");
+            int contratoId = rs.getInt("convenio"); // campo 'convenio' en la tabla Evaluacion
+
+            Contrato contrato = new ContratoDao().buscarConvenioPorId(contratoId); // Obteniendo el Contrato relacionado
+            Evaluacion evaluacion = new Evaluacion(idEvaluacion, calificacion, contrato);
+            evaluaciones.add(evaluacion);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return evaluaciones;
+}
     
 }

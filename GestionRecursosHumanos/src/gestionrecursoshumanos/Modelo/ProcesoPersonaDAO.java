@@ -61,28 +61,29 @@ public class ProcesoPersonaDAO {
         }
     }
 
-    // Método para buscar un ProcesoPersona por su ID
-   public ProcesoPersona buscarProcesoPersonaPorId(int id) {
-        ProcesoPersona procesoPersona = null;
-        String sql = "SELECT * FROM ProcesoPersona WHERE id_procesoPersona = ?";
-        try (Connection con = Conexion.ConnectionAS()) {
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                int idProcesoPersona = rs.getInt("id_procesoPersona");
-                int candidatoId = rs.getInt("candidato");
-                int seleccionId = rs.getInt("seleccion");
-                Personas candidato = new PersonasDAO().findById(candidatoId);
-                ProcesoSeleccion seleccion = new ProcesoSeleccionDAO().buscarProcesoSeleccionPorId(seleccionId);
+    
+    public static  ProcesoPersona buscarProcesoPersonaPorId(int id) {
+    ProcesoPersona procesoPersona = null;
+    String sql = "SELECT * FROM ProcesoPersona WHERE id_procesoPersona = ?";
+    try (Connection con = Conexion.ConnectionAS()) {
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            int idProcesoPersona = rs.getInt("id_procesoPersona");
+            int candidatoId = rs.getInt("candidato");
+            int seleccionId = rs.getInt("seleccion");
+            Personas candidato = new PersonasDAO().findById(candidatoId);
+            ProcesoSeleccion seleccion = new ProcesoSeleccionDAO().buscarProcesoSeleccionPorId(seleccionId);
 
-                procesoPersona = new ProcesoPersona(idProcesoPersona, candidato, seleccion);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            // Crear objeto ProcesoPersona con los datos obtenidos
+            procesoPersona = new ProcesoPersona(idProcesoPersona, candidato, seleccion);
         }
-        return procesoPersona;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return procesoPersona;
+}
      private Personas buscarPersonaPorId(int id) {
         PersonasDAO personasDAO = new PersonasDAO();
         return personasDAO.findById(id);

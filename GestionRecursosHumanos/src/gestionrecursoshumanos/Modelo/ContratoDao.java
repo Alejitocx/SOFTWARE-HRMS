@@ -5,6 +5,7 @@
 package gestionrecursoshumanos.Modelo;
 
 import gestionrecursoshumanos.Conexion.Conexion;
+import gestionrecursoshumanos.Modelo.ProcesoPersonaDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,10 +48,10 @@ public void update(Contrato contrato) {
     }
 }
 
-public Contrato find(int idContrato) {
+public Contrato buscarConvenioPorId(int idContrato) {
     Contrato contrato = null;
     String sql = "SELECT * FROM Contrato WHERE id_contrato = ?";
-    try (Connection con = Conexion.ConnectionAS) {
+    try (Connection con = Conexion.ConnectionAS()) {
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setInt(1, idContrato);
         ResultSet rs = pst.executeQuery();
@@ -58,9 +59,7 @@ public Contrato find(int idContrato) {
             String tipoContrato = rs.getString("tipo_contrato");
             LocalDate fechaInicio = rs.getDate("fecha_inicio").toLocalDate();
             String fechaFinalizacion = rs.getString("fecha_finalizacion"); // Cambiado a String directamente
-            int empleadoId = rs.getInt("empleado_id");
-
-            ProcesoPersona empleado = buscarProcesoPersonaPorId(empleadoId); // Suponiendo que hay un método para esto
+            ProcesoPersona empleado = ProcesoPersonaDAO.buscarProcesoPersonaPorId(rs.getInt("empleado"));
             contrato = new Contrato(idContrato, tipoContrato, fechaInicio, fechaFinalizacion, empleado);
         }
     } catch (SQLException e) {
@@ -80,22 +79,10 @@ public void delete(int idContrato) {
     }
 }
 
-private ProcesoPersona buscarProcesoPersonaPorId(int id) {
-    ProcesoPersona procesoPersona = null;
-    String sql = "SELECT * FROM ProcesoPersona WHERE id_proceso_persona = ?";
-    try (Connection con = Conexion.ConnectionAS) {
-        PreparedStatement pst = con.prepareStatement(sql);
-        pst.setInt(1, id);
-        ResultSet rs = pst.executeQuery();
-        if (rs.next()) {
-            int idProcesoPersona = rs.getInt("id_proceso_persona");
-            String nombre = rs.getString("nombre");
-            // Aquí deberías crear un objeto ProcesoPersona usando los datos obtenidos de la base de datos
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return procesoPersona;
-}
+
+
+
+
+
 
 }
