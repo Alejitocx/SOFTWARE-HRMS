@@ -36,47 +36,6 @@ public class CargoDao {
             e.printStackTrace();
         }
     }
-
-    public void update(Cargo cargo) {
-        String sql = UPDATE_SQL;
-        try (Connection con = Conexion.ConnectionAS()) {
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, cargo.getCargosDisponibles());
-            pst.setFloat(2, cargo.getSalario());
-            pst.setInt(3, cargo.getIdCargo());
-            pst.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Cargo find(int idCargo) {
-        Cargo cargo = null;
-        String sql = FIND_SQL;
-        try (Connection con = Conexion.ConnectionAS) {
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, idCargo);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                cargo = new Cargo(rs.getInt("idCargo"), rs.getString("cargosDisponibles"), rs.getFloat("salario"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return cargo;
-    }
-
-    public void delete(int idCargo) {
-        String sql = DELETE_SQL;
-        try (Connection con = Conexion.ConnectionAS) {
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, idCargo);
-            pst.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-     // Método para encontrar un Cargo por su ID
      // Método para encontrar un Cargo por su ID
     public Cargo findById(int idCargo) {
         String sql = "SELECT * FROM Cargo WHERE id_cargo = ?";

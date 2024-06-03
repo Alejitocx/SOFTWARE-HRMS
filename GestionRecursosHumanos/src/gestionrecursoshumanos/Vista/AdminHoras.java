@@ -31,6 +31,14 @@ public class AdminHoras extends javax.swing.JPanel {
     public AdminHoras() {
         initComponents();
     }
+       private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,14 +53,21 @@ public class AdminHoras extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        TxtCONT = new javax.swing.JTextField();
+        TxtCON = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        TxtHoras = new javax.swing.JTextField();
+        TxtH1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        TxtCONT1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        TxtHoras1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        TXTIDH = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setMaximumSize(new java.awt.Dimension(1097, 817));
@@ -74,18 +89,18 @@ public class AdminHoras extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("INSPECCION DE HORAS LABORADAS");
 
-        TxtCONT.setBackground(new java.awt.Color(255, 255, 255));
-        TxtCONT.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
-        TxtCONT.setForeground(new java.awt.Color(0, 0, 0));
-        TxtCONT.addActionListener(new java.awt.event.ActionListener() {
+        TxtCON.setBackground(new java.awt.Color(255, 255, 255));
+        TxtCON.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        TxtCON.setForeground(new java.awt.Color(0, 0, 0));
+        TxtCON.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtCONTActionPerformed(evt);
+                TxtCONActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("INGRESE EL NUMERO DE CONTRATO:");
+        jLabel4.setText("CONTRATO:");
         jLabel4.setToolTipText("");
 
         jLabel5.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
@@ -93,12 +108,12 @@ public class AdminHoras extends javax.swing.JPanel {
         jLabel5.setText("INGRESE HORAS TOTALES DE TRABAJO DIARIO:");
         jLabel5.setToolTipText("");
 
-        TxtHoras.setBackground(new java.awt.Color(255, 255, 255));
-        TxtHoras.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
-        TxtHoras.setForeground(new java.awt.Color(0, 0, 0));
-        TxtHoras.addActionListener(new java.awt.event.ActionListener() {
+        TxtH1.setBackground(new java.awt.Color(255, 255, 255));
+        TxtH1.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        TxtH1.setForeground(new java.awt.Color(0, 0, 0));
+        TxtH1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtHorasActionPerformed(evt);
+                TxtH1ActionPerformed(evt);
             }
         });
 
@@ -135,28 +150,65 @@ public class AdminHoras extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("INGRESE EL NUMERO DE CONTRATO:");
+        jLabel6.setToolTipText("");
+
+        TxtCONT1.setBackground(new java.awt.Color(255, 255, 255));
+        TxtCONT1.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        TxtCONT1.setForeground(new java.awt.Color(0, 0, 0));
+        TxtCONT1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtCONT1ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText(" HORAS TOTALES DE TRABAJO");
+        jLabel9.setToolTipText("");
+
+        TxtHoras1.setBackground(new java.awt.Color(255, 255, 255));
+        TxtHoras1.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        TxtHoras1.setForeground(new java.awt.Color(0, 0, 0));
+        TxtHoras1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtHoras1ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("ID DE HORA");
+        jLabel10.setToolTipText("");
+
+        TXTIDH.setBackground(new java.awt.Color(255, 255, 255));
+        TXTIDH.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        TXTIDH.setForeground(new java.awt.Color(0, 0, 0));
+        TXTIDH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXTIDHActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(0, 255, 51));
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jButton3.setText("EDITAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(91, 91, 91)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(40, 40, 40)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtCONT, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92))
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -170,9 +222,48 @@ public class AdminHoras extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jButton2)
-                .addGap(95, 95, 95)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(190, 190, 190)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(111, 111, 111)
+                            .addComponent(jLabel9))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(46, 46, 46)
+                            .addComponent(TXTIDH, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(134, 134, 134)
+                            .addComponent(TxtCON, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(121, 121, 121)
+                            .addComponent(TxtH1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(53, 53, 53)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(127, 127, 127)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(599, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(504, Short.MAX_VALUE)
+                    .addComponent(TxtCONT1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(425, 425, 425)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(504, Short.MAX_VALUE)
+                    .addComponent(TxtHoras1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(450, 450, 450)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,14 +272,8 @@ public class AdminHoras extends javax.swing.JPanel {
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TxtCONT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -201,9 +286,40 @@ public class AdminHoras extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jButton2)))
-                .addGap(347, 347, 347)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TXTIDH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtCON, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TxtH1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(49, 49, 49)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(176, 176, 176)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(124, 124, 124)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(654, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(131, 131, 131)
+                    .addComponent(TxtCONT1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(661, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(204, 204, 204)
+                    .addComponent(TxtHoras1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(588, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -223,7 +339,7 @@ public class AdminHoras extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 // Obtener el ID del contrato ingresado por el usuario en el JTextField
-String idContratoStr = TxtCONT.getText().trim();
+String idContratoStr = TxtCON.getText().trim();
 if (idContratoStr.isEmpty()) {
     JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID para el contrato.");
     return;
@@ -245,7 +361,7 @@ if (contrato == null) {
 }
 
 // Obtener el número de horas ingresado por el usuario
-String horasStr = TxtHoras.getText().trim();
+String horasStr = TxtH1.getText().trim();
 if (horasStr.isEmpty()) {
     JOptionPane.showMessageDialog(null, "Por favor, ingrese el número de horas trabajadas.");
     return;
@@ -274,13 +390,13 @@ JOptionPane.showMessageDialog(null, "HORAS AGREGADAS CORRECTAMENTE");
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void TxtCONTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCONTActionPerformed
+    private void TxtCONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCONActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtCONTActionPerformed
+    }//GEN-LAST:event_TxtCONActionPerformed
 
-    private void TxtHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtHorasActionPerformed
+    private void TxtH1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtH1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtHorasActionPerformed
+    }//GEN-LAST:event_TxtH1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
    // Obtener todas las horas trabajadas
@@ -310,17 +426,70 @@ if (horasTrabajadasList.isEmpty()) {
 }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void TxtCONT1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCONT1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtCONT1ActionPerformed
+
+    private void TxtHoras1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtHoras1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtHoras1ActionPerformed
+
+    private void TXTIDHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTIDHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXTIDHActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+     String idHorasTrabajadasStr = TXTIDH.getText().trim();
+        String idContratoStr = TxtCON.getText().trim();
+        String horasTotalesStr = TxtH1.getText().trim();
+
+        if (!isNumeric(idHorasTrabajadasStr) || !isNumeric(idContratoStr) || !isNumeric(horasTotalesStr)) {
+            JOptionPane.showMessageDialog(null, "Todos los campos deben ser números válidos.");
+            return;
+        }
+
+        int idHorasTrabajadas = Integer.parseInt(idHorasTrabajadasStr);
+        int idContrato = Integer.parseInt(idContratoStr);
+        int horasTotales = Integer.parseInt(horasTotalesStr);
+
+        // Buscar si existen los registros
+        HorasTrabajadasDAO horasTrabajadasDAO = new HorasTrabajadasDAO();
+        HorasTrabajadas horasTrabajadas = horasTrabajadasDAO.findById(idHorasTrabajadas);
+
+        if (horasTrabajadas != null) {
+            // Actualizar los datos
+            ContratoDao contratoDAO = new ContratoDao();
+            Contrato contrato = contratoDAO.buscarConvenioPorId(idContrato);
+            if (contrato != null) {
+                horasTrabajadas.setHorasTotales(horasTotales);
+                horasTrabajadas.setContrato(contrato);
+                horasTrabajadasDAO.update(horasTrabajadas);
+            } else {
+                JOptionPane.showMessageDialog(null, "Contrato no encontrado.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Horas Trabajadas no encontradas.");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtCONT;
-    private javax.swing.JTextField TxtHoras;
+    private javax.swing.JTextField TXTIDH;
+    private javax.swing.JTextField TxtCON;
+    private javax.swing.JTextField TxtCONT1;
+    private javax.swing.JTextField TxtH1;
+    private javax.swing.JTextField TxtHoras1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

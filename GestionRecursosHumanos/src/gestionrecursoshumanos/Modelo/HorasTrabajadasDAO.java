@@ -12,6 +12,7 @@ import java.time.LocalTime;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,16 +34,18 @@ public class HorasTrabajadasDAO {
     }
 
     public void update(HorasTrabajadas horasTrabajadas) {
-        String sql = "UPDATE HorasTrabajadas SET horas_totales = ?, ID_CONTRATO = ? WHERE id_horasTrabajadas = ?";
-        try (Connection con = Conexion.ConnectionAS()) {
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, horasTrabajadas.getHorasTotales());
-            pst.setInt(2, horasTrabajadas.getContrato().getIdContrato()); // Obtener el ID del contrato asociado
-            pst.setInt(3, horasTrabajadas.getIdHorasTrabajadas());
-            pst.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+          String sql = "UPDATE HorasTrabajadas SET horas_totales = ?, ID_CONTRATO = ? WHERE id_horasTrabajadas = ?";
+    try (Connection con = Conexion.ConnectionAS()) {
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, horasTrabajadas.getHorasTotales());
+        pst.setInt(2, horasTrabajadas.getContrato().getIdContrato());
+        pst.setInt(3, horasTrabajadas.getIdHorasTrabajadas());
+        pst.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Horas trabajadas actualizadas correctamente.");
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al actualizar horas trabajadas.");
+    }
     }
 
     public HorasTrabajadas findById(int idHorasTrabajadas) {
@@ -58,7 +61,7 @@ public class HorasTrabajadasDAO {
                 // Crear un objeto Contrato con el ID obtenido
                 ContratoDao contratoDAO = new ContratoDao();
                 Contrato contrato = contratoDAO.buscarConvenioPorId(idContrato);
-                horasTrabajadas = new HorasTrabajadas(idHorasTrabajadas, contrato,horasTotales);
+                horasTrabajadas = new HorasTrabajadas(idHorasTrabajadas,contrato,horasTotales);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,8 +87,8 @@ public class HorasTrabajadasDAO {
          ResultSet rs = pst.executeQuery()) {
         while (rs.next()) {
             int idHorasTrabajadas = rs.getInt("id_horasTrabajadas");
-            int idContrato = rs.getInt("ID_CONTRATO");
             int horasTotales = rs.getInt("horas_totales");
+            int idContrato = rs.getInt("ID_CONTRATO");
             // Obtener el contrato asociado
             ContratoDao contratoDAO = new ContratoDao();
             Contrato contrato = contratoDAO.buscarConvenioPorId(idContrato);
@@ -98,6 +101,28 @@ public class HorasTrabajadasDAO {
     }
     return listaHorasTrabajadas;
     }
+     
+       public int obtenerHorasTotalesPorContrato(int idContrato) {
+        int horasTotales = 0;
+        String sql = "SELECT SUM(horas_totales) AS horas_totales FROM HorasTrabajadas WHERE ID_CONTRATO = ?";
+        
+        try (Connection con = Conexion.ConnectionAS();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+            
+            pst.setInt(1, idContrato);
+            ResultSet rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                horasTotales = rs.getInt("horas_totales");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return horasTotales;
+    }
+       
    }
 
 

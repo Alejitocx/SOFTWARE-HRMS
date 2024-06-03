@@ -48,7 +48,7 @@ public void update(Contrato contrato) {
     }
 }
 
-public Contrato buscarConvenioPorId(int idContrato) {
+public static Contrato buscarConvenioPorId(int idContrato) {
     Contrato contrato = null;
     String sql = "SELECT * FROM Contrato WHERE id_contrato = ?";
     try (Connection con = Conexion.ConnectionAS()) {
@@ -77,11 +77,8 @@ public void delete(int idContrato) {
     } catch (SQLException e) {
         e.printStackTrace();
     }
+    
 }
-
-
-
-
 
 
 

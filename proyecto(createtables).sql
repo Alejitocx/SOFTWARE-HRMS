@@ -19,16 +19,8 @@ create table HorasTrabajadas(
     FOREIGN KEY (ID_CONTRATO) REFERENCES Contrato(id_contrato)
 );
 select * from HorasTrabajadas;
--- Eliminar las columnas hora_inicio y hora_salida
-ALTER TABLE HorasTrabajadas
-DROP COLUMN hora_inicio,
-DROP COLUMN hora_salida;
+DROP TABLE  HorasTrabajadas;
 
--- Agregar la columna horas_totales
-ALTER TABLE HorasTrabajadas
-ADD COLUMN horas_totales INT;
-
-select * from HorasTrabajadas;
 
 
 create table Salida(
@@ -128,9 +120,17 @@ create table Nomina(
        motivoSalida INT,
 	   convenio INT,
        FOREIGN KEY (convenio) REFERENCES Contrato ( id_contrato),
-       FOREIGN KEY (horasTrabajo) REFERENCES HorasTrabajadas ( id_horasTrabajadas),
        FOREIGN KEY (motivoSalida) REFERENCES Salida (id_salida )
 );
+select * from Nomina;
+
+-- Primero, eliminamos la clave foránea de la tabla Nomina
+ALTER TABLE Nomina
+DROP CONSTRAINT horasTrabajo;
+-- Consulta para verificar si la columna horasTrabajo en la tabla Nomina sigue siendo una clave foránea
+-- Luego, cambiamos el tipo de datos de la columna horasTrabajo a INT
+ALTER TABLE Nomina
+ALTER COLUMN horasTrabajo SET DATA TYPE INT;
 
 create table Descuentos(
       id_descuentos int PRIMARY KEY,

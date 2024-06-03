@@ -14,22 +14,20 @@ public class Nomina {
     @Id
     private int idNomina;
     private float pagoNomina;
-    
-    @ManyToOne
-    private HorasTrabajadas horasTrabajo;
-    
+    private int horasTrabajo;
+ 
     @ManyToOne
     private Salida motivoSalida;
     
     @ManyToOne
     private Contrato convenio;
 
-    // Constructor sin parámetros
+   // Constructor por defecto
     public Nomina() {
     }
 
-    // Constructor con parámetros
-    public Nomina(int idNomina, float pagoNomina, HorasTrabajadas horasTrabajo, Salida motivoSalida, Contrato convenio) {
+    // Constructor con todos los campos
+    public Nomina(int idNomina, float pagoNomina, int horasTrabajo, Salida motivoSalida, Contrato convenio) {
         this.idNomina = idNomina;
         this.pagoNomina = pagoNomina;
         this.horasTrabajo = horasTrabajo;
@@ -37,7 +35,7 @@ public class Nomina {
         this.convenio = convenio;
     }
 
-    // Getters and Setters
+    // Getters y setters
     public int getIdNomina() {
         return idNomina;
     }
@@ -54,11 +52,11 @@ public class Nomina {
         this.pagoNomina = pagoNomina;
     }
 
-    public HorasTrabajadas getHorasTrabajo() {
+    public int getHorasTrabajo() {
         return horasTrabajo;
     }
 
-    public void setHorasTrabajo(HorasTrabajadas horasTrabajo) {
+    public void setHorasTrabajo(int horasTrabajo) {
         this.horasTrabajo = horasTrabajo;
     }
 
