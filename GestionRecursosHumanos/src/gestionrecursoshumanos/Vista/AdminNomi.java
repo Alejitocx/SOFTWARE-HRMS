@@ -4,6 +4,21 @@
  */
 package gestionrecursoshumanos.Vista;
 
+import gestionrecursoshumanos.Modelo.Cargo;
+import gestionrecursoshumanos.Modelo.CargoDao;
+import gestionrecursoshumanos.Modelo.Contrato;
+import gestionrecursoshumanos.Modelo.ContratoDao;
+import gestionrecursoshumanos.Modelo.DescuentoLey;
+import gestionrecursoshumanos.Modelo.DescuentoLeyDAO;
+import gestionrecursoshumanos.Modelo.HorasTrabajadasDAO;
+import gestionrecursoshumanos.Modelo.Nomina;
+import gestionrecursoshumanos.Modelo.NominaDAO;
+import gestionrecursoshumanos.Modelo.ProcesoPersona;
+import gestionrecursoshumanos.Modelo.ProcesoPersonaDAO;
+import gestionrecursoshumanos.Modelo.Salida;
+import gestionrecursoshumanos.Modelo.SalidaDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alejo
@@ -28,7 +43,7 @@ public class AdminNomi extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TXT1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -41,12 +56,12 @@ public class AdminNomi extends javax.swing.JPanel {
 
         jLabel3.setText("jLabel3");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TXT1.setBackground(new java.awt.Color(255, 255, 255));
+        TXT1.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
+        TXT1.setForeground(new java.awt.Color(0, 0, 0));
+        TXT1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TXT1ActionPerformed(evt);
             }
         });
 
@@ -57,7 +72,7 @@ public class AdminNomi extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(0, 102, 0));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("BUSCAR NOMINA");
+        jButton1.setText("GENERAR NOMINA");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -67,16 +82,24 @@ public class AdminNomi extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("NOMINA EMPLEADO");
+        jLabel7.setText("GENERACION NOMINA DE EMPLEADO");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID DE EMPLADO", "ID DE NOMINA", "CARGO", "SALARIO BASE", "DESCUENTOS DE LEY", "SALARIO NETO"
+                "ID DE NOMINA", "PAGO DE LA NOMINA", "HORAS DE TRABAO", "SALIDA", "EMPLEADO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -85,40 +108,44 @@ public class AdminNomi extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(1050, 1050, 1050))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(1050, 1050, 1050))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80))))
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(197, 197, 197)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(368, 368, 368)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(227, 227, 227)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(57, 57, 57)
+                                .addComponent(TXT1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(317, 317, 317)
+                                .addComponent(jButton1)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(59, 59, 59)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                    .addComponent(TXT1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149)
+                .addGap(141, 141, 141)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -138,16 +165,79 @@ public class AdminNomi extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TXT1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TXT1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+   try {
+    int idProcesoPersona = Integer.parseInt(TXT1.getText().trim());
+    int idNomina = idProcesoPersona;
+
+    // Buscar ProcesoPersona por ID
+    ProcesoPersona procesoPersona = new ProcesoPersonaDAO().buscarProcesoPersonaPorId(idProcesoPersona);
+    if (procesoPersona != null) {
+        int idSeleccion = procesoPersona.getSeleccion().getIdProceso();
+
+        // Buscar Cargo por ID
+        Cargo cargo = new CargoDao().findById(idSeleccion);
+        if (cargo != null) {
+            float salario = cargo.getSalario();
+
+            // Buscar Descuento de Ley por ID 1
+            DescuentoLey descuentoLey = new DescuentoLeyDAO().buscarDescuentoLeyPorId(1);
+            if (descuentoLey != null) {
+                float porcentajeDescuento = descuentoLey.getPorcentaje();
+
+                // Calcular salario neto
+                float salarioNeto = salario - (salario * (porcentajeDescuento / 100));
+
+                // Redondear el salario neto
+                salarioNeto = Math.round(salarioNeto * 100.0f) / 100.0f;
+
+                // Obtener horas totales por contrato usando el ID del JTextField como ID_CONTRATO
+                int horasTotales = new HorasTrabajadasDAO().obtenerHorasTotalesPorContrato(idProcesoPersona);
+
+                // Buscar el tipo de salida usando el ID del JTextField como ID_SALIDA
+                Salida salida = new SalidaDAO().findById(idProcesoPersona);
+                if (salida != null) {
+                    // Obtener el contrato desde la selección
+                    Contrato contrato = new ContratoDao().buscarConvenioPorId(procesoPersona.getSeleccion().getIdProceso());
+
+                    if (contrato != null) {
+                        // Crear objeto Nomina con los datos obtenidos
+                        Nomina nomina = new Nomina(idNomina, salarioNeto, horasTotales, salida, contrato);
+
+                        // Guardar Nomina en la base de datos
+                        boolean creado = new NominaDAO().crearNomina(nomina);
+                        if (creado) {
+                            System.out.println("Nomina creada exitosamente.");
+                        } else {
+                            System.out.println("Error al crear la Nomina.");
+                        }
+                    } else {
+                        System.out.println("Contrato no encontrado.");
+                    }
+                } else {
+                    System.out.println("Salida no encontrada para id_salida: " + idProcesoPersona);
+                }
+            } else {
+                System.out.println("Descuento de Ley no encontrado para id_descuento: 1");
+            }
+        } else {
+            System.out.println("Cargo no encontrado para id_cargo: " + idSeleccion);
+        }
+    } else {
+        System.out.println("ProcesoPersona no encontrado para id_procesoPersona: " + idProcesoPersona);
+    }
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "Por favor ingrese un número entero válido en el campo de texto.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+}
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TXT1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -155,6 +245,5 @@ public class AdminNomi extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

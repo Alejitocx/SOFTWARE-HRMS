@@ -40,11 +40,11 @@ public Nomina buscarNominaPorId(int id) {
 
 // Crear una nueva Nomina
 public boolean crearNomina(Nomina nomina) {
-    boolean creado = false;
+   boolean creado = false;
     String sql = "INSERT INTO Nomina (id_nomina, pagoNomina, horasTrabajo, motivoSalida, convenio) VALUES (?, ?, ?, ?, ?)";
     try (Connection con = Conexion.ConnectionAS()) {
         PreparedStatement pst = con.prepareStatement(sql);
-        pst.setInt(1, nomina.getIdNomina());
+        pst.setInt(1, nomina.getIdNomina()); // Línea 51
         pst.setFloat(2, nomina.getPagoNomina());
         pst.setInt(3, nomina.getHorasTrabajo());
         pst.setInt(4, nomina.getMotivoSalida().getId_salida());

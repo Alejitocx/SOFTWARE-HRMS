@@ -3,13 +3,13 @@
       tipo_descuento VARCHAR(15),
 	  porsentaje float
 );
+select * from DescuentoLey;
+DELETE FROM DescuentoLey;
 
 INSERT INTO DescuentoLey (id_descuento, tipo_descuento, porsentaje) 
 VALUES 
-    (1, 'Seguridad Social', 10.5),
-    (2, 'Pensión', 5.0),
-    (3, 'Salud', 3.0),
-    (4, 'Caja Compensación', 4.5);
+    (1, 'DESCUENTOS DE LEY', 0.09);
+    
 
 
 create table HorasTrabajadas(
