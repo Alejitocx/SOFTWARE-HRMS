@@ -70,6 +70,7 @@ public class AdminCont extends javax.swing.JPanel {
         TxtFEI.setBackground(new java.awt.Color(255, 255, 255));
         TxtFEI.setFont(new java.awt.Font("Footlight MT Light", 1, 18)); // NOI18N
         TxtFEI.setForeground(new java.awt.Color(0, 0, 0));
+        TxtFEI.setText("DD/MM/AAAA");
         TxtFEI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtFEIActionPerformed(evt);

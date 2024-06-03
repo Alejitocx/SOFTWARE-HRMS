@@ -4,6 +4,10 @@
  */
 package gestionrecursoshumanos.Vista;
 
+import gestionrecursoshumanos.Modelo.Salida;
+import gestionrecursoshumanos.Modelo.SalidaDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alejo
@@ -75,7 +79,7 @@ public class UsuarioSalida extends javax.swing.JPanel {
 
         jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACACIONES", "LICENCIA", "LICENCIA NO REMUNARADA" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACACIONES", "LICENCIA" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -148,7 +152,41 @@ public class UsuarioSalida extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+           
+        try {
+    // Validar y parsear ID
+    int id;
+    try {
+        id = Integer.parseInt(jTextField1.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "El ID debe ser un número entero.");
+        return;
+    }
+
+    // Validar selección de salida del JComboBox
+    String tipoSalida = (String) jComboBox1.getSelectedItem();
+    if (tipoSalida == null || tipoSalida.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de salida.");
+        return;
+    }
+
+    // Crear instancia de Salida
+    Salida salida = new Salida(id, tipoSalida);
+
+    // Insertar la salida en la base de datos
+    SalidaDAO salidaDAO = new SalidaDAO();
+    salidaDAO.insert(salida);
+
+    // Mostrar mensaje de éxito
+    JOptionPane.showMessageDialog(null, "Salida insertada exitosamente.");
+    
+    // Limpiar campos
+    jTextField1.setText("");
+    jComboBox1.setSelectedIndex(-1);
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
+}
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

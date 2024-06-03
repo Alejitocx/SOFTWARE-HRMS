@@ -24,8 +24,8 @@ public class Logins extends javax.swing.JPanel {
 private final String adminEmail = "1";
 private final String adminPass = "1";
 
-private final String userEmail = "user";
-private final String userPass = "user123";
+private final String userEmail = "2";
+private final String userPass = "2";
 
 public void validar() {
         String correo = jTextcoreeo1.getText();

@@ -180,10 +180,9 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="2">
                 <StringItem index="0" value="VACACIONES"/>
                 <StringItem index="1" value="LICENCIA"/>
-                <StringItem index="2" value="LICENCIA NO REMUNARADA"/>
               </StringArray>
             </Property>
           </Properties>

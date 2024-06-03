@@ -62,7 +62,7 @@ public class SalidaDAO {
         return salida;
     }
 
-    public void delete(int id_salida) {
+    public static void delete(int id_salida) {
         String sql = "DELETE FROM Salida WHERE id_salida = ?";
         try (Connection con = Conexion.ConnectionAS()) {
             PreparedStatement pst = con.prepareStatement(sql);
