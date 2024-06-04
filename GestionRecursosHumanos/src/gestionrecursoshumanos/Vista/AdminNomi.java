@@ -15,9 +15,12 @@ import gestionrecursoshumanos.Modelo.Nomina;
 import gestionrecursoshumanos.Modelo.NominaDAO;
 import gestionrecursoshumanos.Modelo.ProcesoPersona;
 import gestionrecursoshumanos.Modelo.ProcesoPersonaDAO;
+import gestionrecursoshumanos.Modelo.ProcesoSeleccion;
 import gestionrecursoshumanos.Modelo.Salida;
 import gestionrecursoshumanos.Modelo.SalidaDAO;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -82,7 +85,7 @@ public class AdminNomi extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("GENERACION NOMINA DE EMPLEADO");
+        jLabel7.setText("GENERACION NOMINA ESPECIFICA DE EMPLEADO");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,44 +111,41 @@ public class AdminNomi extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(1050, 1050, 1050))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80))))
+                .addComponent(jLabel3)
+                .addGap(1050, 1050, 1050))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57)
-                                .addComponent(TXT1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(317, 317, 317)
-                                .addComponent(jButton1)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(197, 197, 197)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(57, 57, 57)
+                                    .addComponent(TXT1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(317, 317, 317)
+                                    .addComponent(jButton1))))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(48, 48, 48)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 928, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TXT1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(80, 80, 80)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addGap(71, 71, 71)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(141, 141, 141)
+                .addGap(144, 144, 144)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -177,58 +177,83 @@ public class AdminNomi extends javax.swing.JPanel {
     // Buscar ProcesoPersona por ID
     ProcesoPersona procesoPersona = new ProcesoPersonaDAO().buscarProcesoPersonaPorId(idProcesoPersona);
     if (procesoPersona != null) {
-        int idSeleccion = procesoPersona.getSeleccion().getIdProceso();
+        ProcesoSeleccion seleccion = procesoPersona.getSeleccion();
+        if (seleccion != null) {
+            Cargo cargo = seleccion.getFuncion();
+            if (cargo != null) {
+                float salario = cargo.getSalario();
 
-        // Buscar Cargo por ID
-        Cargo cargo = new CargoDao().findById(idSeleccion);
-        if (cargo != null) {
-            float salario = cargo.getSalario();
+                // Buscar Descuento de Ley por ID 1
+                DescuentoLey descuentoLey = new DescuentoLeyDAO().buscarDescuentoLeyPorId(1);
+                if (descuentoLey != null) {
+                    float porcentajeDescuento = descuentoLey.getPorcentaje();
 
-            // Buscar Descuento de Ley por ID 1
-            DescuentoLey descuentoLey = new DescuentoLeyDAO().buscarDescuentoLeyPorId(1);
-            if (descuentoLey != null) {
-                float porcentajeDescuento = descuentoLey.getPorcentaje();
+                    // Calcular salario neto
+                    float salarioNeto = salario - (salario * (porcentajeDescuento / 100));
 
-                // Calcular salario neto
-                float salarioNeto = salario - (salario * (porcentajeDescuento / 100));
+                    // Redondear el salario neto
+                    salarioNeto = Math.round(salarioNeto * 100.0f) / 100.0f;
 
-                // Redondear el salario neto
-                salarioNeto = Math.round(salarioNeto * 100.0f) / 100.0f;
+                    // Obtener horas totales por contrato usando el ID del JTextField como ID_CONTRATO
+                    int horasTotales = new HorasTrabajadasDAO().obtenerHorasTotalesPorContrato(idProcesoPersona);
 
-                // Obtener horas totales por contrato usando el ID del JTextField como ID_CONTRATO
-                int horasTotales = new HorasTrabajadasDAO().obtenerHorasTotalesPorContrato(idProcesoPersona);
+                    // Buscar el tipo de salida usando el ID del JTextField como ID_SALIDA
+                    Salida salida = new SalidaDAO().findById(idProcesoPersona);
+                    if (salida != null) {
+                        // Buscar el contrato usando el ID ingresado
+                        Contrato contrato = new ContratoDao().buscarConvenioPorId(idProcesoPersona);
+                        if (contrato != null) {
+                            // Crear objeto Nomina con los datos obtenidos
+                            Nomina nomina = new Nomina(idNomina, salarioNeto, horasTotales, salida, contrato);
 
-                // Buscar el tipo de salida usando el ID del JTextField como ID_SALIDA
-                Salida salida = new SalidaDAO().findById(idProcesoPersona);
-                if (salida != null) {
-                    // Obtener el contrato desde la selección
-                    Contrato contrato = new ContratoDao().buscarConvenioPorId(procesoPersona.getSeleccion().getIdProceso());
+                            // Guardar Nomina en la base de datos
+                             // Guardar Nomina en la base de datos
+            boolean creado = new NominaDAO().crearNomina(nomina);
+            if (creado) {
+                // Recuperar todas las nominas
+                List<Nomina> nominas = new NominaDAO().obtenerTodasLasNominas();
 
-                    if (contrato != null) {
-                        // Crear objeto Nomina con los datos obtenidos
-                        Nomina nomina = new Nomina(idNomina, salarioNeto, horasTotales, salida, contrato);
+                // Crear un DefaultTableModel para almacenar los datos de la tabla Nomina
+                DefaultTableModel model = new DefaultTableModel();
+                model.addColumn("ID");
+                model.addColumn("Pago Nomina");
+                model.addColumn("Horas Trabajo");
+                model.addColumn("Motivo Salida");
+                model.addColumn("Convenio");
 
-                        // Guardar Nomina en la base de datos
-                        boolean creado = new NominaDAO().crearNomina(nomina);
-                        if (creado) {
-                            System.out.println("Nomina creada exitosamente.");
+                // Llenar el modelo con los datos de las nominas
+                for (Nomina n : nominas) {
+                    model.addRow(new Object[]{n.getIdNomina(), n.getPagoNomina(), n.getHorasTrabajo(), n.getMotivoSalida(), n.getConvenio()});
+                }
+
+                // Establecer el modelo en el JTable
+                jTable1.setModel(model);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al crear la Nomina.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+  
+                            if (creado) {
+                                JOptionPane.showMessageDialog(null, "Nomina creada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Error al crear la Nomina.", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         } else {
-                            System.out.println("Error al crear la Nomina.");
+                            JOptionPane.showMessageDialog(null, "Contrato no encontrado para id_contrato: " + idProcesoPersona, "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
-                        System.out.println("Contrato no encontrado.");
+                        JOptionPane.showMessageDialog(null, "Salida no encontrada para id_salida: " + idProcesoPersona, "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    System.out.println("Salida no encontrada para id_salida: " + idProcesoPersona);
+                    JOptionPane.showMessageDialog(null, "Descuento de Ley no encontrado para id_descuento: 1", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                System.out.println("Descuento de Ley no encontrado para id_descuento: 1");
+                JOptionPane.showMessageDialog(null, "Cargo no encontrado para id_cargo.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            System.out.println("Cargo no encontrado para id_cargo: " + idSeleccion);
+            JOptionPane.showMessageDialog(null, "ProcesoSeleccion no encontrado para ProcesoPersona.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     } else {
-        System.out.println("ProcesoPersona no encontrado para id_procesoPersona: " + idProcesoPersona);
+        JOptionPane.showMessageDialog(null, "ProcesoPersona no encontrado para id_procesoPersona: " + idProcesoPersona, "Error", JOptionPane.ERROR_MESSAGE);
     }
 } catch (NumberFormatException e) {
     JOptionPane.showMessageDialog(null, "Por favor ingrese un número entero válido en el campo de texto.", "Error de entrada", JOptionPane.ERROR_MESSAGE);

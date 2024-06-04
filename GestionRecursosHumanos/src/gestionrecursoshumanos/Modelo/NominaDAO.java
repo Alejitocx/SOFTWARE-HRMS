@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author alejo
@@ -40,13 +42,13 @@ public Nomina buscarNominaPorId(int id) {
 
 // Crear una nueva Nomina
 public boolean crearNomina(Nomina nomina) {
-   boolean creado = false;
+    boolean creado = false;
     String sql = "INSERT INTO Nomina (id_nomina, pagoNomina, horasTrabajo, motivoSalida, convenio) VALUES (?, ?, ?, ?, ?)";
     try (Connection con = Conexion.ConnectionAS()) {
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setInt(1, nomina.getIdNomina()); // Línea 51
         pst.setFloat(2, nomina.getPagoNomina());
-        pst.setInt(3, nomina.getHorasTrabajo());
+        pst.setInt(3, nomina.getHorasTrabajo()); // Aquí se asume que horasTrabajo es un valor entero, no un ID
         pst.setInt(4, nomina.getMotivoSalida().getId_salida());
         pst.setInt(5, nomina.getConvenio().getIdContrato());
         creado = pst.executeUpdate() > 0;
@@ -87,5 +89,33 @@ public boolean eliminarNomina(int id) {
     }
     return eliminado;
 }
+public List<Nomina> obtenerTodasLasNominas() {
+        List<Nomina> nominas = new ArrayList<>();
+        String sql = "SELECT * FROM Nomina";
+        try (Connection con = Conexion.ConnectionAS();
+             PreparedStatement pst = con.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                int idNomina = rs.getInt("id_nomina");
+                float pagoNomina = rs.getFloat("pagoNomina");
+                int horasTrabajo = rs.getInt("horasTrabajo");
+                int idMotivoSalida = rs.getInt("motivoSalida");
+                int idConvenio = rs.getInt("convenio");
+
+                // Obtener motivo salida
+                Salida motivoSalida = new SalidaDAO().findById(idMotivoSalida);
+
+                // Obtener contrato
+                Contrato contrato = new ContratoDao().buscarConvenioPorId(idConvenio);
+
+                // Crear objeto Nomina y agregarlo a la lista
+                Nomina nomina = new Nomina(idNomina, pagoNomina, horasTrabajo, motivoSalida, contrato);
+                nominas.add(nomina);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nominas;
+    }
 
 }

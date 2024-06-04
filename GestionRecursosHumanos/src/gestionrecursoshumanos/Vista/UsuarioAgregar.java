@@ -192,7 +192,7 @@ public class UsuarioAgregar extends javax.swing.JPanel {
         int horas;
         try {
             horas = Integer.parseInt(horasStr);
-            if (horas <= 0 || horas > 12) {
+            if (horas <= 0 || horas > 8) {
                 JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido de horas (entre 1 y 12).");
                 return;
             }

@@ -36,5 +36,9 @@ public class Salida {
     public void setTipo_salida(String tipo_salida) {
         this.tipo_salida = tipo_salida;
     }
+    @Override
+public String toString() {
+    return tipo_salida; // Suponiendo que "tipo_salida" es el atributo que deseas mostrar
+}
 }
 

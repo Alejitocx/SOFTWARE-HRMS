@@ -74,6 +74,11 @@ public class Contrato {
     public void setEmpleado(ProcesoPersona empleado) {
         this.empleado = empleado;
     }
+    @Override
+public String toString() {
+    return String.valueOf(idContrato); // Suponiendo que "idContrato" es el atributo que deseas mostrar
+}
+
 }
 
 
